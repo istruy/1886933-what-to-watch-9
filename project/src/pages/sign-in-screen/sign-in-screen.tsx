@@ -1,8 +1,4 @@
-type SignInScreenProps = {
-  isErrorOrMessage: boolean;
-}
-
-function SignInScreen({ isErrorOrMessage }: SignInScreenProps): JSX.Element {
+function SignInScreen(): JSX.Element {
   return (
     <form action="#" className="sign-in__form">
       <div className="sign-in__fields">
