@@ -1,4 +1,5 @@
 
+import Logo from '../../components/logo/logo';
 import SmallMovieScreen from '../../components/small-movie-screen/small-movie-screen';
 
 type MainScreenProps = {
@@ -8,14 +9,6 @@ type MainScreenProps = {
 }
 
 function MainScreen({ genreFilm, releaseYearFilm, nameFilm }: MainScreenProps): JSX.Element {
-  // const movies = () => {
-  //   const allMovies: JSX.Element[] = [];
-  //   for (let i = 0; i < filmCount; i++) {
-  //     allMovies.push(<SmallMovieScreen />);
-  //   }
-  //   return allMovies;
-  // };
-
   return (
     <>
       <div className="visually-hidden">
@@ -165,11 +158,7 @@ function MainScreen({ genreFilm, releaseYearFilm, nameFilm }: MainScreenProps): 
 
         <footer className="page-footer">
           <div className="logo">
-            <a className="logo__link logo__link--light" href="/#">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
+            <Logo />
           </div>
 
           <div className="copyright">

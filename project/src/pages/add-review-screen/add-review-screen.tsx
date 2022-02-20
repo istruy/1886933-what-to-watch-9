@@ -1,12 +1,10 @@
+import Logo from '../../components/logo/logo';
+
 type ReviewProps = {
   filmName: string;
 }
 
-function MyListScreen({ filmName }: ReviewProps): JSX.Element {
-  // const getFilmFile = () => {
-  //   return filmName.split(' ').join('-');
-  // }
-
+function AddReviewScreen({ filmName }: ReviewProps): JSX.Element {
   return (
     <>
       <div className="visually-hidden">
@@ -48,11 +46,7 @@ function MyListScreen({ filmName }: ReviewProps): JSX.Element {
 
           <header className="page-header">
             <div className="logo">
-              <a href="main.html" className="logo__link">
-                <span className="logo__letter logo__letter--1">W</span>
-                <span className="logo__letter logo__letter--2">T</span>
-                <span className="logo__letter logo__letter--3">W</span>
-              </a>
+              <Logo />
             </div>
 
             <nav className="breadcrumbs">
@@ -134,4 +128,4 @@ function MyListScreen({ filmName }: ReviewProps): JSX.Element {
   );
 }
 
-export default MyListScreen;
+export default AddReviewScreen;
