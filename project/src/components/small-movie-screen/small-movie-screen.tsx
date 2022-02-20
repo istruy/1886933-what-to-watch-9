@@ -1,9 +1,3 @@
-
-// type SmallMovieScreenProps = {
-//   filmName: string,
-//   filmFile: string,
-// }
-
 function SmallMovieScreen(): JSX.Element {
   return (
     <article className="small-film-card catalog__films-card">

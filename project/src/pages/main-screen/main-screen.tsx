@@ -1,22 +1,14 @@
 
+import Logo from '../../components/logo/logo';
 import SmallMovieScreen from '../../components/small-movie-screen/small-movie-screen';
 
 type MainScreenProps = {
-  filmCount: number;
   genreFilm: string;
   releaseYearFilm: number;
   nameFilm: string;
 }
 
-function MainScreen({ filmCount, genreFilm, releaseYearFilm, nameFilm }: MainScreenProps): JSX.Element {
-  // const movies = () => {
-  //   const allMovies: JSX.Element[] = [];
-  //   for (let i = 0; i < filmCount; i++) {
-  //     allMovies.push(<SmallMovieScreen />);
-  //   }
-  //   return allMovies;
-  // };
-
+function MainScreen({ genreFilm, releaseYearFilm, nameFilm }: MainScreenProps): JSX.Element {
   return (
     <>
       <div className="visually-hidden">
@@ -60,8 +52,8 @@ function MainScreen({ filmCount, genreFilm, releaseYearFilm, nameFilm }: MainScr
 
         <header className="page-header film-card__head">
           <div className="logo">
-            <a className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
+            <a className="logo__link" href="/#">
+              <span className="logo__letter logo__letter--1" >W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
             </a>
@@ -74,7 +66,7 @@ function MainScreen({ filmCount, genreFilm, releaseYearFilm, nameFilm }: MainScr
               </div>
             </li>
             <li className="user-block__item">
-              <a className="user-block__link">Sign out</a>
+              <a className="user-block__link" href="/#">Sign out</a>
             </li>
           </ul>
         </header>
@@ -117,34 +109,34 @@ function MainScreen({ filmCount, genreFilm, releaseYearFilm, nameFilm }: MainScr
 
           <ul className="catalog__genres-list">
             <li className="catalog__genres-item catalog__genres-item--active">
-              <a href="#" className="catalog__genres-link">All genres</a>
+              <a href="/#" className="catalog__genres-link">All genres</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Comedies</a>
+              <a href="/#" className="catalog__genres-link">Comedies</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Crime</a>
+              <a href="/#" className="catalog__genres-link">Crime</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Documentary</a>
+              <a href="/#" className="catalog__genres-link">Documentary</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Dramas</a>
+              <a href="/#" className="catalog__genres-link">Dramas</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Horror</a>
+              <a href="/#" className="catalog__genres-link">Horror</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Kids & Family</a>
+              <a href="/#" className="catalog__genres-link">Kids & Family</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Romance</a>
+              <a href="/#" className="catalog__genres-link">Romance</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Sci-Fi</a>
+              <a href="/#" className="catalog__genres-link">Sci-Fi</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Thrillers</a>
+              <a href="/#" className="catalog__genres-link">Thrillers</a>
             </li>
           </ul>
 
@@ -166,11 +158,7 @@ function MainScreen({ filmCount, genreFilm, releaseYearFilm, nameFilm }: MainScr
 
         <footer className="page-footer">
           <div className="logo">
-            <a className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
+            <Logo />
           </div>
 
           <div className="copyright">
