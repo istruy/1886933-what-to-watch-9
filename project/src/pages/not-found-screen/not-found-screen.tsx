@@ -1,14 +1,8 @@
 import Logo from '../../components/logo/logo';
-import FilmListScreen from '../../components/films-list-screen/films-list-screen';
-import { Film } from '../../types/films';
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const';
 
-type MyListScreenProps = {
-  films: Film[];
-}
-
-function MyListScreen(props: MyListScreenProps): JSX.Element {
-  const { films } = props;
-
+function NotFoundScreen(): JSX.Element {
   return (
     <>
       <div className="visually-hidden">
@@ -50,32 +44,24 @@ function MyListScreen(props: MyListScreenProps): JSX.Element {
             </a>
           </div>
 
-          <h1 className="page-title user-page__title">My list</h1>
-
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </li>
-            <li className="user-block__item">
-              <a className="user-block__link" href="/#">Sign out</a>
-            </li>
-          </ul>
+          <h1 className="page-title user-page__title">Sign in</h1>
         </header>
 
-        <section className="catalog">
-          <h2 className="catalog__title visually-hidden">Catalog</h2>
-
-          <div className="catalog__films-list">
-            <FilmListScreen films={films} />
-          </div>
-        </section>
+        <div className="sign-in user-page__content">
+          <h1>404</h1>
+          <br />
+          <small>Page not found</small>
+          <br />
+          <Link to={AppRoute.Main}>
+            Go to main page
+          </Link>
+        </div>
 
         <footer className="page-footer">
           <div className="logo">
             <Logo />
           </div>
+
           <div className="copyright">
             <p>© 2019 What to watch Ltd.</p>
           </div>
@@ -85,4 +71,4 @@ function MyListScreen(props: MyListScreenProps): JSX.Element {
   );
 }
 
-export default MyListScreen;
+export default NotFoundScreen;
