@@ -1,6 +1,34 @@
 import Logo from '../../components/logo/logo';
+import { Film } from '../../types/films';
+import { Link, useParams } from 'react-router-dom';
+import { AppRoute } from '../../const';
+import { useNavigate } from 'react-router-dom';
+import NotFoundScreen from '../not-found-screen/not-found-screen';
 
-function MovieScreen(): JSX.Element {
+type MovieScreenProps = {
+  filmsInfo: Film[];
+}
+
+function MovieScreen(props: MovieScreenProps): JSX.Element {
+  const navigate = useNavigate();
+
+  const { filmsInfo } = props;
+  const filmId = useParams();
+
+  const filmInfoById = filmsInfo.find((film) => film.id === Number(filmId.id));
+
+  if (filmInfoById === undefined) {
+    return <NotFoundScreen />;
+  }
+
+  const { name
+    , posterImage
+    , director
+    , starring
+    , genre
+    , released,
+  } = filmInfoById;
+
   return (
     <>
       <div className="visually-hidden">
@@ -38,7 +66,7 @@ function MovieScreen(): JSX.Element {
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+            <img src={posterImage} alt={name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -62,26 +90,32 @@ function MovieScreen(): JSX.Element {
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
-              <h2 className="film-card__title">The Grand Budapest Hotel</h2>
+              <h2 className="film-card__title">{name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">Drama</span>
-                <span className="film-card__year">2014</span>
+                <span className="film-card__genre">{genre}</span>
+                <span className="film-card__year">{released}</span>
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
+                <button className="btn btn--play film-card__button" type="button"
+                  onClick={() => navigate(`/player/${filmInfoById.id}`)}
+                >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button">
+                <button className="btn btn--list film-card__button" type="button"
+                  onClick={() => navigate(AppRoute.MyList)}
+                >
                   <svg viewBox="0 0 19 20" width="19" height="20">
                     <use xlinkHref="#add"></use>
                   </svg>
                   <span>My list</span>
                 </button>
-                <a href="add-review.html" className="btn film-card__button">Add review</a>
+                <Link to={`/films/${filmInfoById.id}/review`} className="btn film-card__button">
+                  Add review
+                </Link>
               </div>
             </div>
           </div>
@@ -90,7 +124,7 @@ function MovieScreen(): JSX.Element {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={posterImage} alt={`${posterImage} poster`} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
@@ -112,23 +146,15 @@ function MovieScreen(): JSX.Element {
                 <div className="film-card__text-col">
                   <p className="film-card__details-item">
                     <strong className="film-card__details-name">Director</strong>
-                    <span className="film-card__details-value">Wes Anderson</span>
+                    <span className="film-card__details-value">{director}</span>
                   </p>
                   <p className="film-card__details-item">
                     <strong className="film-card__details-name">Starring</strong>
                     <span className="film-card__details-value">
-                      Bill Murray, <br />
-                      Edward Norton, <br />
-                      Jude Law, <br />
-                      Willem Dafoe, <br />
-                      Saoirse Ronan, <br />
-                      Tony Revoloru, <br />
-                      Tilda Swinton, <br />
-                      Tom Wilkinson, <br />
-                      Owen Wilkinson, <br />
-                      Adrien Brody, <br />
-                      Ralph Fiennes, <br />
-                      Jeff Goldblum
+                      {starring.map((actor) => {
+                        const valueInfo = `${actor},`;
+                        return (<>{valueInfo}<br /></>);
+                      })}
                     </span>
                   </p>
                 </div>
@@ -140,11 +166,11 @@ function MovieScreen(): JSX.Element {
                   </p>
                   <p className="film-card__details-item">
                     <strong className="film-card__details-name">Genre</strong>
-                    <span className="film-card__details-value">Comedy</span>
+                    <span className="film-card__details-value">{genre}</span>
                   </p>
                   <p className="film-card__details-item">
                     <strong className="film-card__details-name">Released</strong>
-                    <span className="film-card__details-value">2014</span>
+                    <span className="film-card__details-value">{released}</span>
                   </p>
                 </div>
               </div>

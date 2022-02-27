@@ -1,14 +1,17 @@
-
+import FilmListScreen from '../../components/films-list-screen/films-list-screen';
 import Logo from '../../components/logo/logo';
-import SmallMovieScreen from '../../components/small-movie-screen/small-movie-screen';
+import { Film } from '../../types/films';
+import { useNavigate } from 'react-router-dom';
+import { AppRoute } from '../../const';
 
 type MainScreenProps = {
-  genreFilm: string;
-  releaseYearFilm: number;
-  nameFilm: string;
+  film: Film;
+  films: Film[];
 }
 
-function MainScreen({ genreFilm, releaseYearFilm, nameFilm }: MainScreenProps): JSX.Element {
+function MainScreen({ film, films }: MainScreenProps): JSX.Element {
+  const navigate = useNavigate();
+
   return (
     <>
       <div className="visually-hidden">
@@ -45,7 +48,7 @@ function MainScreen({ genreFilm, releaseYearFilm, nameFilm }: MainScreenProps): 
 
       <section className="film-card">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src="img/bg-the-grand-budapest-hotel.jpg" alt={film.name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -78,20 +81,24 @@ function MainScreen({ genreFilm, releaseYearFilm, nameFilm }: MainScreenProps): 
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{nameFilm}</h2>
+              <h2 className="film-card__title">{film.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{genreFilm}</span>
-                <span className="film-card__year">{releaseYearFilm}</span>
+                <span className="film-card__genre">{film.genre}</span>
+                <span className="film-card__year">{film.released}</span>
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
+                <button className="btn btn--play film-card__button" type="button"
+                  onClick={() => navigate(`/player/${film.id}`)}
+                >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button">
+                <button className="btn btn--list film-card__button" type="button"
+                  onClick={() => navigate(AppRoute.MyList)}
+                >
                   <svg viewBox="0 0 19 20" width="19" height="20">
                     <use xlinkHref="#add"></use>
                   </svg>
@@ -141,14 +148,7 @@ function MainScreen({ genreFilm, releaseYearFilm, nameFilm }: MainScreenProps): 
           </ul>
 
           <div className="catalog__films-list">
-            <SmallMovieScreen />
-            <SmallMovieScreen />
-            <SmallMovieScreen />
-            <SmallMovieScreen />
-            <SmallMovieScreen />
-            <SmallMovieScreen />
-            <SmallMovieScreen />
-            <SmallMovieScreen />
+            <FilmListScreen films={films} />
           </div>
 
           <div className="catalog__more">

@@ -1,4 +1,18 @@
-function PlayerScreen(): JSX.Element {
+import { Film } from '../../types/films';
+import { useParams } from 'react-router-dom';
+import NotFoundScreen from '../not-found-screen/not-found-screen';
+
+type PlayerProps = {
+  films: Film[];
+}
+
+function PlayerScreen({ films }: PlayerProps): JSX.Element {
+  const filmId = useParams();
+  const filmInfoById = films.find((film) => film.id === Number(filmId.id));
+
+  if (filmInfoById === undefined) {
+    return <NotFoundScreen />;
+  }
   return (
     <>
       <div className="visually-hidden">
@@ -31,7 +45,7 @@ function PlayerScreen(): JSX.Element {
       </div>
 
       <div className="player">
-        <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
+        <video src="#" className="player__video" poster={filmInfoById.posterImage}></video>
 
         <button type="button" className="player__exit">Exit</button>
 
@@ -39,7 +53,7 @@ function PlayerScreen(): JSX.Element {
           <div className="player__controls-row">
             <div className="player__time">
               <progress className="player__progress" value="30" max="100"></progress>
-              <div className="player__toggler" style={{left: '30%'}}>Toggler</div>
+              <div className="player__toggler" style={{ left: '30%' }}>Toggler</div>
             </div>
             <div className="player__time-value">1:30:29</div>
           </div>
