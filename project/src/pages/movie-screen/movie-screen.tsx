@@ -6,16 +6,16 @@ import { useNavigate } from 'react-router-dom';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 type MovieScreenProps = {
-  filmsInfo: Film[];
+  films: Film[];
 }
 
 function MovieScreen(props: MovieScreenProps): JSX.Element {
   const navigate = useNavigate();
 
-  const { filmsInfo } = props;
+  const { films } = props;
   const filmId = useParams();
 
-  const filmInfoById = filmsInfo.find((film) => film.id === Number(filmId.id));
+  const filmInfoById = films.find((film) => film.id === Number(filmId.id));
 
   if (filmInfoById === undefined) {
     return <NotFoundScreen />;

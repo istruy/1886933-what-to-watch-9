@@ -3,16 +3,16 @@ import { FormEvent } from 'react';
 
 type ReviewProps = {
   review: Review;
-  onAnswer: (review: Review) => void
+  onSendMessage: (review: Review) => void
 }
 
-function SendReviewScreen({ review, onAnswer }: ReviewProps): JSX.Element {
+function SendReviewScreen({ review, onSendMessage }: ReviewProps): JSX.Element {
   return (
     <form action="#"
       className="add-review__form"
       onSubmit={(evt: FormEvent<HTMLFormElement>) => {
         evt.preventDefault();
-        onAnswer(review);
+        onSendMessage(review);
       }}
     >
       <div className="rating">

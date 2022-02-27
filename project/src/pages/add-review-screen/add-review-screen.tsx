@@ -7,10 +7,10 @@ import NotFoundScreen from '../not-found-screen/not-found-screen';
 type ReviewProps = {
   films: Film[];
   review: Review;
-  onAnswer: (review: Review) => void;
+  onSendMessage: (review: Review) => void;
 }
 
-function AddReviewScreen({ films, review, onAnswer }: ReviewProps): JSX.Element {
+function AddReviewScreen({ films, review, onSendMessage }: ReviewProps): JSX.Element {
   const filmId = useParams();
   const filmInfoById = films.find((film) => film.id === Number(filmId.id));
 
@@ -91,7 +91,7 @@ function AddReviewScreen({ films, review, onAnswer }: ReviewProps): JSX.Element 
         </div>
 
         <div className="add-review">
-          <SendReviewScreen review={review} onAnswer={onAnswer} />
+          <SendReviewScreen review={review} onSendMessage={onSendMessage} />
         </div>
 
       </section>

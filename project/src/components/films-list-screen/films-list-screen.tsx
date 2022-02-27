@@ -12,17 +12,10 @@ function FilmListScreen({ films }: FilmListProps): JSX.Element {
 
   return (
     <>
-      {/* eslint-disable */}
       {
-        films.map((film) => <SmallMovieScreen
-          filmInfo={film}
-          isActive={film.id === activeFilmId}
-          onMouseOn={setActiveFilmId}
-        />)
+        films.map((film) => <SmallMovieScreen key={film.id} film={film} isActive={film.id === activeFilmId} onMouseOn={setActiveFilmId} />)
       }
-      {/* eslint-enable */}
     </>
-
   );
 }
 

@@ -35,8 +35,8 @@ function App({ film, films, review }: AppScreenProps): JSX.Element {
             <PrivateRoute
               authorizationStatus={AuthorizationStatus.Auth}
             >
-              <AddReviewScreen films={films} review={review} onAnswer={() => {
-                throw new Error('Function \'onAnswer\' isn\'t implemented.');
+              <AddReviewScreen films={films} review={review} onSendMessage={() => {
+                throw new Error('Function \'onSendMessage\' isn\'t implemented.');
               }}
               />
             </PrivateRoute>
@@ -48,13 +48,13 @@ function App({ film, films, review }: AppScreenProps): JSX.Element {
             <PrivateRoute
               authorizationStatus={AuthorizationStatus.Auth}
             >
-              <MyListScreen filmInfo={films} />
+              <MyListScreen films={films} />
             </PrivateRoute>
           }
         />
         <Route
           path={AppRoute.Film}
-          element={<MovieScreen filmsInfo={films} />}
+          element={<MovieScreen films={films} />}
         />
         <Route
           path={AppRoute.Player}

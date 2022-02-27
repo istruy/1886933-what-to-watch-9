@@ -3,11 +3,11 @@ import FilmListScreen from '../../components/films-list-screen/films-list-screen
 import { Film } from '../../types/films';
 
 type MyListScreenProps = {
-  filmInfo: Film[];
+  films: Film[];
 }
 
 function MyListScreen(props: MyListScreenProps): JSX.Element {
-  const { filmInfo } = props;
+  const { films } = props;
 
   return (
     <>
@@ -68,7 +68,7 @@ function MyListScreen(props: MyListScreenProps): JSX.Element {
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
           <div className="catalog__films-list">
-            <FilmListScreen films={filmInfo} />
+            <FilmListScreen films={films} />
           </div>
         </section>
 
