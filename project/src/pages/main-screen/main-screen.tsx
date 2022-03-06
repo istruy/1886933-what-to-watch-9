@@ -3,6 +3,9 @@ import Logo from '../../components/logo/logo';
 import { Film } from '../../types/films';
 import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../const';
+import withFilmList from '../../hooks/with-film-list';
+
+const FilmsListWrapper = withFilmList(FilmListScreen);
 
 type MainScreenProps = {
   film: Film;
@@ -148,7 +151,7 @@ function MainScreen({ film, films }: MainScreenProps): JSX.Element {
           </ul>
 
           <div className="catalog__films-list">
-            <FilmListScreen films={films} />
+            <FilmsListWrapper films={films} />
           </div>
 
           <div className="catalog__more">

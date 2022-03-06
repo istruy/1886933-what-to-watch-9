@@ -1,19 +1,18 @@
 import { Film } from '../../types/films';
-import { useState } from 'react';
-import SmallMovieScreen from '../../components/small-movie-screen/small-movie-screen';
 
 type FilmListProps = {
   films: Film[];
+  renderPlayer: (film: Film) => JSX.Element;
 }
 
-function FilmListScreen({ films }: FilmListProps): JSX.Element {
-
-  const [activeFilmId, setActiveFilmId] = useState<number | null>(null);
+function FilmListScreen({ films, renderPlayer }: FilmListProps): JSX.Element {
 
   return (
     <>
       {
-        films.map((film) => <SmallMovieScreen key={film.id} film={film} isActive={film.id === activeFilmId} onMouseOn={setActiveFilmId} />)
+        films.map((film) => (
+          renderPlayer(film)
+        ))
       }
     </>
   );
