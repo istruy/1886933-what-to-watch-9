@@ -13,7 +13,7 @@ type SmallMovieScreenProps = {
 function SmallMovieScreen({ film, isActive, onMouseOn, onMouseOff }: SmallMovieScreenProps): JSX.Element {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
-  let timer: NodeJS.Timeout;
+  let timer: NodeJS.Timeout = setTimeout(() => 1 , 1000);
 
   useEffect(() => {
     if (videoRef.current === null) {
@@ -25,12 +25,12 @@ function SmallMovieScreen({ film, isActive, onMouseOn, onMouseOff }: SmallMovieS
     }
     videoRef.current.load();
     clearTimeout(timer);
-  }, [isActive]);
+  }, [isActive, timer]);
 
   return (
     <article className="small-film-card catalog__films-card"
       onMouseOver={onMouseOn}
-      onMouseOut={onMouseOff}
+      onMouseLeave={onMouseOff}
     >
       <div className="small-film-card__image">
         <VideoPlayerScreen
