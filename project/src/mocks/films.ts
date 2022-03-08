@@ -9,7 +9,7 @@ export const films: Film[] = [
     backgroundImage: 'http://picsum.photos/248/152?r=68',
     backgroundColor: '#ffffff',
     videoLink: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
-    previewVideoLink: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
+    previewVideoLink: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm',
     description: 'Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.',
     rating: 9,
     scoresCount: 300,

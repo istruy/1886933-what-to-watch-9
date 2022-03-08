@@ -1,6 +1,9 @@
 import Logo from '../../components/logo/logo';
 import FilmListScreen from '../../components/films-list-screen/films-list-screen';
 import { Film } from '../../types/films';
+import WithFilmList from '../../hooks/with-film-list';
+
+const FilmsListWrapper = WithFilmList(FilmListScreen);
 
 type MyListScreenProps = {
   films: Film[];
@@ -68,7 +71,7 @@ function MyListScreen(props: MyListScreenProps): JSX.Element {
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
           <div className="catalog__films-list">
-            <FilmListScreen films={films} />
+            <FilmsListWrapper films={films} />
           </div>
         </section>
 
