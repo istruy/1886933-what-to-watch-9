@@ -1,18 +1,18 @@
-import { Review } from '../../types/films';
+import { Comment } from '../../types/films';
 import { FormEvent } from 'react';
 
 type ReviewProps = {
-  review: Review;
-  onSendMessage: (review: Review) => void
+  comment: Comment;
+  onSendMessage: (comment: Comment) => void
 }
 
-function SendReviewScreen({ review, onSendMessage }: ReviewProps): JSX.Element {
+function SendReviewScreen({ comment, onSendMessage }: ReviewProps): JSX.Element {
   return (
     <form action="#"
       className="add-review__form"
       onSubmit={(evt: FormEvent<HTMLFormElement>) => {
         evt.preventDefault();
-        onSendMessage(review);
+        onSendMessage(comment);
       }}
     >
       <div className="rating">

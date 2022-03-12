@@ -1,16 +1,16 @@
 import Logo from '../../components/logo/logo';
 import SendReviewScreen from '../../components/send-review-screen/send-review-screen';
-import { Film, Review } from '../../types/films';
+import { Comment, Film } from '../../types/films';
 import { useParams } from 'react-router-dom';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 type ReviewProps = {
   films: Film[];
-  review: Review;
-  onSendMessage: (review: Review) => void;
+  comment: Comment;
+  onSendMessage: (comment: Comment) => void;
 }
 
-function AddReviewScreen({ films, review, onSendMessage }: ReviewProps): JSX.Element {
+function  AddReviewScreen({ films, comment, onSendMessage }: ReviewProps): JSX.Element {
   const filmId = useParams();
   const filmInfoById = films.find((film) => film.id === Number(filmId.id));
 
@@ -91,7 +91,7 @@ function AddReviewScreen({ films, review, onSendMessage }: ReviewProps): JSX.Ele
         </div>
 
         <div className="add-review">
-          <SendReviewScreen review={review} onSendMessage={onSendMessage} />
+          <SendReviewScreen comment={comment} onSendMessage={onSendMessage} />
         </div>
 
       </section>

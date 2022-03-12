@@ -19,6 +19,17 @@ export type Film = {
 }
 
 export type Review = {
+  comment: string
+  date: string
+  id: number
   rating: number
-  reviewMessage: string
+  user: {
+    id: number
+    name: string
+  }
+}
+
+export type Comment = {
+  comment: string
+  rating: number
 }
