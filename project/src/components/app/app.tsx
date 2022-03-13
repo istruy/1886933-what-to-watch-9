@@ -15,10 +15,10 @@ type AppScreenProps = {
   film: Film;
   films: Film[];
   comment: Comment;
-  review: Review[];
+  reviews: Review[];
 }
 
-function App({ film, films, review, comment }: AppScreenProps): JSX.Element {
+function App({ film, films, reviews, comment }: AppScreenProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
@@ -55,7 +55,7 @@ function App({ film, films, review, comment }: AppScreenProps): JSX.Element {
         />
         <Route
           path={AppRoute.Film}
-          element={<MovieScreen films={films} comments={review} />}
+          element={<MovieScreen films={films} comments={reviews} />}
         />
         <Route
           path={AppRoute.Player}

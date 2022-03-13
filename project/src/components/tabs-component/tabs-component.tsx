@@ -1,7 +1,6 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { TabsFilm } from '../../const';
 import { Film, Review } from '../../types/films';
-import { useState } from 'react';
 import FilmReviewComponent from './film-review';
 import FilmOverviewComponent from './film-overview';
 import FilmDetaisComponent from './film-details';
@@ -11,71 +10,44 @@ type TabsComponentProps = {
   comments: Review[];
 }
 
-let filmInfoContainer: JSX.Element = <> </>;
-let flag = true;
-
-const getLinkByClick = (filmInfo: TabsFilm, film: Film, comments: Review[]) => {
-  switch (filmInfo) {
+const getActiveTab = (tab: TabsFilm, film: Film, comments: Review[]) => {
+  switch (tab) {
     case TabsFilm.Overview:
-      filmInfoContainer = <FilmOverviewComponent film={film} />;
-      break;
+      return <FilmOverviewComponent film={film} />;
     case TabsFilm.Details:
-      filmInfoContainer = <FilmDetaisComponent film={film} />;
-      break;
+      return <FilmDetaisComponent film={film} />;
     case TabsFilm.Review:
-      filmInfoContainer = <FilmReviewComponent comments={comments} />;
-      break;
+      return <FilmReviewComponent comments={comments} />;
   }
 };
 
 function TabsComponent({ film, comments }: TabsComponentProps): JSX.Element {
 
-  const [isActiveTab, setActiveTab] = useState<TabsFilm>(TabsFilm.Overview);
+  const location = useLocation();
+  const activeTab = location.hash.length === 0 ? TabsFilm.Overview : location.hash.substring(1, location.hash.length) as TabsFilm;
 
   return (
     <>
       <nav className="film-nav film-card__nav">
         <ul className="film-nav__list">
-          <li className={`film-nav__item ${isActiveTab === TabsFilm.Overview ? 'film-nav__item--active' : ''}`}>
-            <Link to={`/films/${film.id}`}
-              className="film-nav__link"
-              onClick={(event) => {
-                flag = false;
-                setActiveTab(TabsFilm.Overview);
-                getLinkByClick(TabsFilm.Overview, film, comments);
-              }}
-            >
+          <li className={`film-nav__item ${activeTab === TabsFilm.Overview ? 'film-nav__item--active' : ''}`}>
+            <Link to={`/films/${film.id}`} className="film-nav__link">
               Overview
             </Link>
           </li>
-          <li className={`film-nav__item ${isActiveTab === TabsFilm.Details ? 'film-nav__item--active' : ''}`}>
-            <Link to={`/films/${film.id}`}
-              className="film-nav__link"
-              onClick={() => {
-                flag = false;
-                setActiveTab(TabsFilm.Details);
-                getLinkByClick(TabsFilm.Details, film, comments);
-              }}
-            >
+          <li className={`film-nav__item ${activeTab === TabsFilm.Details ? 'film-nav__item--active' : ''}`}>
+            <Link to={`/films/${film.id}/#${TabsFilm.Details}`} className="film-nav__link">
               Details
             </Link>
           </li>
-          <li className={`film-nav__item ${isActiveTab === TabsFilm.Review ? 'film-nav__item--active' : ''}`}>
-            <Link to={`/films/${film.id}`}
-              className="film-nav__link"
-              onClick={() => {
-                flag = false;
-                setActiveTab(TabsFilm.Review);
-                getLinkByClick(TabsFilm.Review, film, comments);
-              }}
-            >
+          <li className={`film-nav__item ${activeTab === TabsFilm.Review ? 'film-nav__item--active' : ''}`}>
+            <Link to={`/films/${film.id}/#${TabsFilm.Review}`} className="film-nav__link">
               Review
             </Link>
           </li>
         </ul>
       </nav>
-      {flag ? getLinkByClick(TabsFilm.Overview, film, comments) : ''}
-      {filmInfoContainer}
+      {getActiveTab(activeTab, film, comments)}
     </>
   );
 }

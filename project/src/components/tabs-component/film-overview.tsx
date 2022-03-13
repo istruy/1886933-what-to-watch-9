@@ -27,8 +27,10 @@ function FilmOverviewComponent({ film }: FilmDetailsProps): JSX.Element {
               if (index === 0) {
                 return ` ${actor}`;
               }
-              if (index < 4) {
+              if (index < 3) {
                 return `, ${actor} `;
+              } else {
+                return '';
               }
             })}
 

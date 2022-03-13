@@ -7,13 +7,13 @@ import { review, comments } from '../src/mocks/reviews';
 const Setting = {
   film: films[0],
   films: films,
-  review: review,
+  reviews: review,
   comment: comments,
 };
 
 ReactDOM.render(
   <React.StrictMode>
-    <App film={Setting.film} films={Setting.films} review={Setting.review} comment={Setting.comment} />
+    <App film={Setting.film} films={Setting.films} reviews={Setting.reviews} comment={Setting.comment} />
   </React.StrictMode>,
   document.getElementById('root'));
 
