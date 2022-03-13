@@ -9,15 +9,16 @@ import PlayerScreen from '../../pages/player-screen/player-screen';
 import PrivateRoute from '../private-route/private-route';
 import { Film } from '../../types/films';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
-import { Review } from '../../types/films';
+import { Review, Comment } from '../../types/films';
 
 type AppScreenProps = {
   film: Film;
   films: Film[];
-  review: Review;
+  comment: Comment;
+  reviews: Review[];
 }
 
-function App({ film, films, review }: AppScreenProps): JSX.Element {
+function App({ film, films, reviews, comment }: AppScreenProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
@@ -35,7 +36,7 @@ function App({ film, films, review }: AppScreenProps): JSX.Element {
             <PrivateRoute
               authorizationStatus={AuthorizationStatus.Auth}
             >
-              <AddReviewScreen films={films} review={review} onSendMessage={() => {
+              <AddReviewScreen films={films} comment={comment} onSendMessage={() => {
                 throw new Error('Function \'onSendMessage\' isn\'t implemented.');
               }}
               />
@@ -54,7 +55,7 @@ function App({ film, films, review }: AppScreenProps): JSX.Element {
         />
         <Route
           path={AppRoute.Film}
-          element={<MovieScreen films={films} />}
+          element={<MovieScreen films={films} comments={reviews} />}
         />
         <Route
           path={AppRoute.Player}

@@ -1,5 +1,5 @@
 import { Film } from '../../types/films';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import VideoPlayerScreen from '../video-player/video-player-element';
 import { useRef, useEffect } from 'react';
 
@@ -40,9 +40,9 @@ function SmallMovieScreen({ film, isActive, onMouseOn, onMouseOff }: SmallMovieS
         />
       </div>
       <h3 className="small-film-card__title">
-        <Link to={`/films/${film.id}`} className="small-film-card__link">
+        <a href={`/films/${film.id}`} className="small-film-card__link">
           {film.name}
-        </Link>
+        </a>
       </h3>
     </article>
   );

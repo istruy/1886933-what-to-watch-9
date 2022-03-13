@@ -1,16 +1,16 @@
 import Logo from '../../components/logo/logo';
 import SendReviewScreen from '../../components/send-review-screen/send-review-screen';
-import { Film, Review } from '../../types/films';
-import { useParams } from 'react-router-dom';
+import { Comment, Film } from '../../types/films';
+import { Link, useParams } from 'react-router-dom';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 type ReviewProps = {
   films: Film[];
-  review: Review;
-  onSendMessage: (review: Review) => void;
+  comment: Comment;
+  onSendMessage: (comment: Comment) => void;
 }
 
-function AddReviewScreen({ films, review, onSendMessage }: ReviewProps): JSX.Element {
+function AddReviewScreen({ films, comment, onSendMessage }: ReviewProps): JSX.Element {
   const filmId = useParams();
   const filmInfoById = films.find((film) => film.id === Number(filmId.id));
 
@@ -65,7 +65,7 @@ function AddReviewScreen({ films, review, onSendMessage }: ReviewProps): JSX.Ele
             <nav className="breadcrumbs">
               <ul className="breadcrumbs__list">
                 <li className="breadcrumbs__item">
-                  <a href="film-page.html" className="breadcrumbs__link">{filmInfoById.name}</a>
+                  <Link to={`/films/${filmInfoById.id}`} className="breadcrumbs__link">{filmInfoById.name}</Link>
                 </li>
                 <li className="breadcrumbs__item">
                   <a className="breadcrumbs__link" href="/#">Add review</a>
@@ -91,7 +91,7 @@ function AddReviewScreen({ films, review, onSendMessage }: ReviewProps): JSX.Ele
         </div>
 
         <div className="add-review">
-          <SendReviewScreen review={review} onSendMessage={onSendMessage} />
+          <SendReviewScreen comment={comment} onSendMessage={onSendMessage} />
         </div>
 
       </section>

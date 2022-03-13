@@ -1,18 +1,18 @@
-import { Review } from '../../types/films';
+import { Comment } from '../../types/films';
 import { FormEvent } from 'react';
 
 type ReviewProps = {
-  review: Review;
-  onSendMessage: (review: Review) => void
+  comment: Comment;
+  onSendMessage: (comment: Comment) => void
 }
 
-function SendReviewScreen({ review, onSendMessage }: ReviewProps): JSX.Element {
+function SendReviewScreen({ comment, onSendMessage }: ReviewProps): JSX.Element {
   return (
     <form action="#"
       className="add-review__form"
       onSubmit={(evt: FormEvent<HTMLFormElement>) => {
         evt.preventDefault();
-        onSendMessage(review);
+        onSendMessage(comment);
       }}
     >
       <div className="rating">
@@ -23,7 +23,7 @@ function SendReviewScreen({ review, onSendMessage }: ReviewProps): JSX.Element {
           <input className="rating__input" id="star-9" type="radio" name="rating" value="9" />
           <label className="rating__label" htmlFor="star-9">Rating 9</label>
 
-          <input className="rating__input" id="star-8" type="radio" name="rating" value="8" checked />
+          <input className="rating__input" id="star-8" type="radio" name="rating" value="8" defaultChecked />
           <label className="rating__label" htmlFor="star-8">Rating 8</label>
 
           <input className="rating__input" id="star-7" type="radio" name="rating" value="7" />

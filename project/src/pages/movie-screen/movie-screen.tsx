@@ -4,15 +4,22 @@ import { Link, useParams } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { useNavigate } from 'react-router-dom';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
+import TabsComponent from '../../components/tabs-component/tabs-component';
+import { Review } from '../../types/films';
+import withFilmList from '../../hooks/with-film-list';
+import FilmListScreen from '../../components/films-list-screen/films-list-screen';
+
+const FilmsListWrapper = withFilmList(FilmListScreen);
 
 type MovieScreenProps = {
   films: Film[];
+  comments: Review[];
 }
 
 function MovieScreen(props: MovieScreenProps): JSX.Element {
   const navigate = useNavigate();
 
-  const { films } = props;
+  const { films, comments } = props;
   const filmId = useParams();
 
   const filmInfoById = films.find((film) => film.id === Number(filmId.id));
@@ -23,8 +30,6 @@ function MovieScreen(props: MovieScreenProps): JSX.Element {
 
   const { name
     , posterImage
-    , director
-    , starring
     , genre
     , released,
   } = filmInfoById;
@@ -128,52 +133,7 @@ function MovieScreen(props: MovieScreenProps): JSX.Element {
             </div>
 
             <div className="film-card__desc">
-              <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  <li className="film-nav__item">
-                    <a href="/#" className="film-nav__link">Overview</a>
-                  </li>
-                  <li className="film-nav__item film-nav__item--active">
-                    <a href="/#" className="film-nav__link">Details</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="/#" className="film-nav__link">Reviews</a>
-                  </li>
-                </ul>
-              </nav>
-
-              <div className="film-card__text film-card__row">
-                <div className="film-card__text-col">
-                  <p className="film-card__details-item">
-                    <strong className="film-card__details-name">Director</strong>
-                    <span className="film-card__details-value">{director}</span>
-                  </p>
-                  <p className="film-card__details-item">
-                    <strong className="film-card__details-name">Starring</strong>
-                    <span className="film-card__details-value">
-                      {starring.map((actor) => {
-                        const valueInfo = `${actor},`;
-                        return (<>{valueInfo}<br /></>);
-                      })}
-                    </span>
-                  </p>
-                </div>
-
-                <div className="film-card__text-col">
-                  <p className="film-card__details-item">
-                    <strong className="film-card__details-name">Run Time</strong>
-                    <span className="film-card__details-value">1h 39m</span>
-                  </p>
-                  <p className="film-card__details-item">
-                    <strong className="film-card__details-name">Genre</strong>
-                    <span className="film-card__details-value">{genre}</span>
-                  </p>
-                  <p className="film-card__details-item">
-                    <strong className="film-card__details-name">Released</strong>
-                    <span className="film-card__details-value">{released}</span>
-                  </p>
-                </div>
-              </div>
+              <TabsComponent film={filmInfoById} comments={comments} />
             </div>
           </div>
         </div>
@@ -184,41 +144,7 @@ function MovieScreen(props: MovieScreenProps): JSX.Element {
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__films-list">
-            <article className="small-film-card catalog__films-card">
-              <div className="small-film-card__image">
-                <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175" />
-              </div>
-              <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">Fantastic Beasts: The Crimes of Grindelwald</a>
-              </h3>
-            </article>
-
-            <article className="small-film-card catalog__films-card">
-              <div className="small-film-card__image">
-                <img src="img/bohemian-rhapsody.jpg" alt="Bohemian Rhapsody" width="280" height="175" />
-              </div>
-              <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">Bohemian Rhapsody</a>
-              </h3>
-            </article>
-
-            <article className="small-film-card catalog__films-card">
-              <div className="small-film-card__image">
-                <img src="img/macbeth.jpg" alt="Macbeth" width="280" height="175" />
-              </div>
-              <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">Macbeth</a>
-              </h3>
-            </article>
-
-            <article className="small-film-card catalog__films-card">
-              <div className="small-film-card__image">
-                <img src="img/aviator.jpg" alt="Aviator" width="280" height="175" />
-              </div>
-              <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">Aviator</a>
-              </h3>
-            </article>
+            <FilmsListWrapper films={[films[0], films[1], films[2], films[3]]} />
           </div>
         </section>
 
