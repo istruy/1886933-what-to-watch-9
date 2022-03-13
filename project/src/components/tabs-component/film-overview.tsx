@@ -23,11 +23,6 @@ function FilmOverviewComponent({ film }: FilmDetailsProps): JSX.Element {
         <p className="film-card__starring">
           <strong>
             Starring:
-            {/* {film.starring[0]},
-            {film.starring[1]},
-            {film.starring[2]},
-            {film.starring[3]} */}
-
             {film.starring.map((actor, index) => {
               if (index === 0) {
                 return ` ${actor}`;
@@ -36,7 +31,6 @@ function FilmOverviewComponent({ film }: FilmDetailsProps): JSX.Element {
                 return `, ${actor} `;
               }
             })}
-
 
             and other
           </strong>
