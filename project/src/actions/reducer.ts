@@ -4,19 +4,23 @@ import { changeGenre, getFilmsList } from './actions';
 import { films } from '../mocks/films';
 
 const initialState = {
-  genre: Genres.All_Genres.toString(),
+  genre: Genres.AllGenres.toString(),
   movieList: films,
+  allFilms: films,
 };
 
 const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(changeGenre, (state, action) => {
-      state.genre = action.payload;
+      const { genre } = action.payload;
+      state.genre = genre;
     })
     .addCase(getFilmsList, (state, action) => {
-      state.movieList = action.payload === Genres.All_Genres.toString()
+      const { genre } = action.payload;
+
+      state.movieList = genre === Genres.AllGenres.toString()
         ? films
-        : films.filter((film) => film.genre === action.payload);
+        : films.filter((film) => film.genre === genre);
     });
 });
 

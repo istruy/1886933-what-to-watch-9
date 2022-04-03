@@ -20,14 +20,27 @@ export enum TabsFilm {
 }
 
 export enum Genres {
-  All_Genres = 'All genres',
+  AllGenres = 'AllGenres',
   Comedies = 'Comedies',
   Crime = 'Crime',
   Documentary = 'Documentary',
   Dramas = 'Dramas',
   Horror = 'Horror',
-  KidsFamily = 'Kids & Family',
+  KidsFamily = 'KidsFamily',
   Romance = 'Romance',
-  SciFi = 'Sci-Fi',
+  SciFi = 'SciFi',
   Thrillers = 'Thrillers',
 }
+
+export const GenresNames = {
+  [Genres.AllGenres]: 'All Genres',
+  [Genres.Comedies]: 'Comedy',
+  [Genres.Crime]: 'Crime',
+  [Genres.Documentary]: 'Documentary',
+  [Genres.Dramas]: 'Drama',
+  [Genres.Horror]: 'Horror',
+  [Genres.KidsFamily]: 'Kids & Family',
+  [Genres.Romance]: 'Romance',
+  [Genres.SciFi]: 'Sci-Fi',
+  [Genres.Thrillers]: 'Thriller',
+};

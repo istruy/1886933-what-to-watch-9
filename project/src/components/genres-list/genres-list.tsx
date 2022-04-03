@@ -1,21 +1,19 @@
 import { Film } from '../../types/films';
-import { Genres } from '../../const';
-// import { Link, useLocation } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
-// import { useAppDispatch } from '../../hooks';
-// import { changeGenre } from '../../actions/actions';
+import { Genres, GenresNames } from '../../const';
+import { Link } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks';
+import { changeGenre, getFilmsList } from '../../actions/actions';
+import { getHumanGenreFromUsefulGenre } from '../films-by-genre/films-by-genre';
 
 type GenresListProps = {
-  films: Film[];
+  allFilms: Film[];
+  genreFilm: string;
 }
 
-function GenresListComponent({ films }: GenresListProps): JSX.Element {
-  // const dispatch = useAppDispatch();
+function GenresListComponent({ allFilms, genreFilm }: GenresListProps): JSX.Element {
+  const dispatch = useAppDispatch();
 
-  const location = useLocation();
-  const activeTab = location.hash.length === 0 ? Genres.All_Genres : location.hash.substring(1, location.hash.length) as Genres;
-
-  const genresList = Array.from(new Set(films.map((film) => {
+  const genresList = Array.from(new Set(allFilms.map((film) => {
     if (film.genre === 'Comedy') {
       return 'Comedies';
     } else if (film.genre === 'Drama') {
@@ -26,23 +24,36 @@ function GenresListComponent({ films }: GenresListProps): JSX.Element {
       return film.genre;
     }
   })));
-  //eslint-disable-next-line
-  console.log(genresList);
+
+  const onClickGenre = (evt: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
+    let genre = evt.currentTarget.children[0].innerHTML;
+    genre = getHumanGenreFromUsefulGenre(genre);
+    dispatch(changeGenre({ genre }));
+    dispatch(getFilmsList({ genre }));
+  };
+
+  // eslint-disable-next-line
 
   return (
     <ul className="catalog__genres-list">
-      <li className={`catalog__genres-item ${activeTab === Genres.All_Genres ? 'catalog__genres-item--active' : ''}`}>
-        {/* <Link to={`/#${Genres.All_Genres}`} className="catalog__genres-link">All genres</Link> */}
+      <li
+        className={`catalog__genres-item ${genreFilm === Genres.AllGenres.toString() ? 'catalog__genres-item--active' : ''}`}
+        onClick={onClickGenre}
+      >
+        <Link to={`/#${Genres.AllGenres}`} className="catalog__genres-link">{GenresNames[Genres.AllGenres]}</Link>
       </li>
       {
-        genresList.map((genre) => {
-          <li
-            // className={`catalog__genres-item ${activeTab === genre ? 'catalog__genres-item--active' : ''}`}
-            // key={genre}
-            // onClick={() => dispatch(changeGenre)}
-          >
-            {/* <Link to={`/#${genre}`} className="catalog__genres-link">{genre}</Link> */}
-          </li>;
+        genresList.map((filmGenre) => {
+          const currentGenrefilm = filmGenre;
+          return (
+            <li
+              className={`catalog__genres-item ${genreFilm === getHumanGenreFromUsefulGenre(currentGenrefilm) ? 'catalog__genres-item--active' : ''}`}
+              key={currentGenrefilm}
+              onClick={onClickGenre}
+            >
+              <Link to={`/#${currentGenrefilm}`} className="catalog__genres-link">{currentGenrefilm}</Link>
+            </li>
+          );
         },
         )
       }

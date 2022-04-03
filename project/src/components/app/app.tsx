@@ -12,19 +12,18 @@ import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import { Review, Comment } from '../../types/films';
 
 type AppScreenProps = {
-  film: Film;
   films: Film[];
   comment: Comment;
   reviews: Review[];
 }
 
-function App({ film, films, reviews, comment }: AppScreenProps): JSX.Element {
+function App({ films, reviews, comment }: AppScreenProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainScreen film={film} films={films} />}
+          element={<MainScreen />}
         />
         <Route
           path={AppRoute.SignIn}

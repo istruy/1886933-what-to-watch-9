@@ -7,17 +7,16 @@ import { Provider } from 'react-redux';
 import { store } from './store';
 
 const Setting = {
-  film: films[0],
   films: films,
   reviews: review,
   comment: comments,
 };
 
 ReactDOM.render(
-  <Provider store={store}>
-    <React.StrictMode>
-      <App film={Setting.film} films={Setting.films} reviews={Setting.reviews} comment={Setting.comment} />
-    </React.StrictMode>
-  </Provider>,
+  <React.StrictMode>
+    <Provider store={store}>
+      <App films={Setting.films} reviews={Setting.reviews} comment={Setting.comment} />
+    </Provider>
+  </React.StrictMode>,
   document.getElementById('root'));
 
