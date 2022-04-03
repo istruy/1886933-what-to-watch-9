@@ -32,8 +32,6 @@ function GenresListComponent({ allFilms, genreFilm }: GenresListProps): JSX.Elem
     dispatch(getFilmsList({ genre }));
   };
 
-  // eslint-disable-next-line
-
   return (
     <ul className="catalog__genres-list">
       <li
