@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { api } from '../store';
 import { store } from '../store';
-import { Film } from '../types/films';
-import { requireAuthorization, loadFilms, setError } from '../actions/actions';
+import { Film, Review } from '../types/films';
+import { requireAuthorization, loadFilms, setError, loadComments } from '../actions/actions';
 import { saveToken, dropToken } from '../services/token';
 import { APIRoute, AuthorizationStatus } from '../const';
 import { AuthData } from '../types/auth-data';
@@ -17,6 +17,22 @@ export const clearErrorAction = createAsyncThunk(
       () => store.dispatch(setError('')),
       TIMEOUT_SHOW_ERROR,
     );
+  },
+);
+
+export const fetchCommentsAction = (filmId: string) => createAsyncThunk(
+  'data/fetchComments',
+  async () => {
+    try {
+      // eslint-disable-next-line
+      console.log(`${APIRoute.Comments}${filmId}`);
+      // eslint-disable-next-line
+      console.log('bla bla bla');
+      const { data } = await api.get<Review[]>(`${APIRoute.Comments}${filmId}`);
+      store.dispatch(loadComments(data));
+    } catch (error) {
+      errorHandle(error);
+    }
   },
 );
 

@@ -1,14 +1,11 @@
-import { Film } from '../../types/films';
 import { useParams } from 'react-router-dom';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
+import { useAppSelector } from '../../hooks/';
 
-type PlayerProps = {
-  films: Film[];
-}
-
-function PlayerScreen({ films }: PlayerProps): JSX.Element {
+function PlayerScreen(): JSX.Element {
   const filmId = useParams();
-  const filmInfoById = films.find((film) => film.id === Number(filmId.id));
+  const { allFilms } = useAppSelector((state) => state);
+  const filmInfoById = allFilms.find((film) => film.id === Number(filmId.id));
 
   if (filmInfoById === undefined) {
     return <NotFoundScreen />;

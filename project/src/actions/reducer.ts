@@ -1,13 +1,13 @@
 import { AuthorizationStatus, Genres } from '../const';
 import { createReducer } from '@reduxjs/toolkit';
-import { changeGenre, getFilmsList, loadFilms, requireAuthorization, setError } from './actions';
-// import { films as filmsItems } from '../mocks/films';
-import { Film } from '../types/films';
+import { changeGenre, getFilmsList, loadComments, loadFilms, requireAuthorization, setError } from './actions';
+import { Film, Review } from '../types/films';
 
 type initialState = {
   genre: string,
   movieList: Film[],
   allFilms: Film[],
+  comments: Review[],
   authorizationStatus: AuthorizationStatus,
   error: string,
   isDataLoaded: boolean,
@@ -17,6 +17,7 @@ const initialState: initialState = {
   genre: Genres.AllGenres.toString(),
   movieList: [],
   allFilms: [],
+  comments: [],
   authorizationStatus: AuthorizationStatus.Unknown,
   error: '',
   isDataLoaded: false,
@@ -45,6 +46,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setError, (state, action) => {
       state.error = action.payload;
+    })
+    .addCase(loadComments, (state, action) => {
+      state.comments = action.payload;
     });
 });
 

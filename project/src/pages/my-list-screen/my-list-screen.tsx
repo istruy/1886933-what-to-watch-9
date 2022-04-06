@@ -1,16 +1,12 @@
 import Logo from '../../components/logo/logo';
 import FilmListScreen from '../../components/films-list-screen/films-list-screen';
-import { Film } from '../../types/films';
+import { useAppSelector } from '../../hooks/';
 import WithFilmList from '../../hooks/with-film-list';
 
 const FilmsListWrapper = WithFilmList(FilmListScreen);
 
-type MyListScreenProps = {
-  films: Film[];
-}
-
-function MyListScreen(props: MyListScreenProps): JSX.Element {
-  const { films } = props;
+function MyListScreen(): JSX.Element {
+  const { allFilms } = useAppSelector((state) => state);
 
   return (
     <>
@@ -71,7 +67,7 @@ function MyListScreen(props: MyListScreenProps): JSX.Element {
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
           <div className="catalog__films-list">
-            <FilmsListWrapper films={films} />
+            <FilmsListWrapper films={allFilms} />
           </div>
         </section>
 
