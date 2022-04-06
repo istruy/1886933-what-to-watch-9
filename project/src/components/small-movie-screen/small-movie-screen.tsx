@@ -1,5 +1,4 @@
 import { Film } from '../../types/films';
-// import { Link } from 'react-router-dom';
 import VideoPlayerScreen from '../video-player/video-player-element';
 import { useRef, useEffect } from 'react';
 

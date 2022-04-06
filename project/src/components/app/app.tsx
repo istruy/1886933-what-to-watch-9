@@ -7,20 +7,17 @@ import MyListScreen from '../../pages/my-list-screen/my-list-screen';
 import MovieScreen from '../../pages/movie-screen/movie-screen';
 import PlayerScreen from '../../pages/player-screen/player-screen';
 import PrivateRoute from '../private-route/private-route';
-import { Film } from '../../types/films';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
-import { Review, Comment } from '../../types/films';
+import { Comment } from '../../types/films';
 import { useAppSelector } from '../../hooks/';
 // import { isCheckedAuth } from '../films-list';
 import LoadingScreen from '../loading-screen/loading-screen';
 
 type AppScreenProps = {
-  films: Film[];
   comment: Comment;
-  reviews: Review[];
 }
 
-function App({ films, reviews, comment }: AppScreenProps): JSX.Element {
+function App({ comment }: AppScreenProps): JSX.Element {
   const { authorizationStatus, isDataLoaded } = useAppSelector((state) => state);
 
   // isCheckedAuth(authorizationStatus) ||
@@ -47,7 +44,7 @@ function App({ films, reviews, comment }: AppScreenProps): JSX.Element {
             <PrivateRoute
               authorizationStatus={authorizationStatus}
             >
-              <AddReviewScreen films={films} comment={comment} onSendMessage={() => {
+              <AddReviewScreen comment={comment} onSendMessage={() => {
                 throw new Error('Function \'onSendMessage\' isn\'t implemented.');
               }}
               />
@@ -60,17 +57,17 @@ function App({ films, reviews, comment }: AppScreenProps): JSX.Element {
             <PrivateRoute
               authorizationStatus={authorizationStatus}
             >
-              <MyListScreen films={films} />
+              <MyListScreen />
             </PrivateRoute>
           }
         />
         <Route
           path={AppRoute.Film}
-          element={<MovieScreen films={films} comments={reviews} />}
+          element={<MovieScreen />}
         />
         <Route
           path={AppRoute.Player}
-          element={<PlayerScreen films={films} />}
+          element={<PlayerScreen />}
         />
         <Route
           path="*"
