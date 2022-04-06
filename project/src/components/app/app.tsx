@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import MainScreen from '../../pages/main-screen/main-screen';
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { AppRoute } from '../../const';
 import SignInScreen from '../../pages/sign-in-screen/sign-in-screen';
 import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
 import MyListScreen from '../../pages/my-list-screen/my-list-screen';
@@ -10,6 +10,9 @@ import PrivateRoute from '../private-route/private-route';
 import { Film } from '../../types/films';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import { Review, Comment } from '../../types/films';
+import { useAppSelector } from '../../hooks/';
+// import { isCheckedAuth } from '../films-list';
+import LoadingScreen from '../loading-screen/loading-screen';
 
 type AppScreenProps = {
   films: Film[];
@@ -18,6 +21,15 @@ type AppScreenProps = {
 }
 
 function App({ films, reviews, comment }: AppScreenProps): JSX.Element {
+  const { authorizationStatus, isDataLoaded } = useAppSelector((state) => state);
+
+  // isCheckedAuth(authorizationStatus) ||
+  if (!isDataLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
+
   return (
     <BrowserRouter>
       <Routes>
@@ -33,7 +45,7 @@ function App({ films, reviews, comment }: AppScreenProps): JSX.Element {
           path={AppRoute.AddReview}
           element={
             <PrivateRoute
-              authorizationStatus={AuthorizationStatus.Auth}
+              authorizationStatus={authorizationStatus}
             >
               <AddReviewScreen films={films} comment={comment} onSendMessage={() => {
                 throw new Error('Function \'onSendMessage\' isn\'t implemented.');
@@ -46,7 +58,7 @@ function App({ films, reviews, comment }: AppScreenProps): JSX.Element {
           path={AppRoute.MyList}
           element={
             <PrivateRoute
-              authorizationStatus={AuthorizationStatus.Auth}
+              authorizationStatus={authorizationStatus}
             >
               <MyListScreen films={films} />
             </PrivateRoute>
