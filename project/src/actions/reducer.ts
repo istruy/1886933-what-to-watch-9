@@ -1,12 +1,26 @@
-import { Genres } from '../const';
+import { AuthorizationStatus, Genres } from '../const';
 import { createReducer } from '@reduxjs/toolkit';
-import { changeGenre, getFilmsList } from './actions';
-import { films } from '../mocks/films';
+import { changeGenre, getFilmsList, loadComments, loadFilms, requireAuthorization, setError } from './actions';
+import { Film, Review } from '../types/films';
 
-const initialState = {
+type InitialState = {
+  genre: string,
+  movieList: Film[],
+  allFilms: Film[],
+  comments: Review[],
+  authorizationStatus: AuthorizationStatus,
+  error: string,
+  isDataLoaded: boolean,
+};
+
+const initialState: InitialState = {
   genre: Genres.AllGenres.toString(),
-  movieList: films,
-  allFilms: films,
+  movieList: [],
+  allFilms: [],
+  comments: [],
+  authorizationStatus: AuthorizationStatus.Unknown,
+  error: '',
+  isDataLoaded: false,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -19,8 +33,22 @@ const reducer = createReducer(initialState, (builder) => {
       const { genre } = action.payload;
 
       state.movieList = genre === Genres.AllGenres.toString()
-        ? films
-        : films.filter((film) => film.genre === genre);
+        ? state.allFilms
+        : state.allFilms.filter((film) => film.genre === genre);
+    })
+    .addCase(loadFilms, (state, action) => {
+      state.allFilms = action.payload;
+      state.movieList = action.payload;
+      state.isDataLoaded = true;
+    })
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
+    })
+    .addCase(setError, (state, action) => {
+      state.error = action.payload;
+    })
+    .addCase(loadComments, (state, action) => {
+      state.comments = action.payload;
     });
 });
 

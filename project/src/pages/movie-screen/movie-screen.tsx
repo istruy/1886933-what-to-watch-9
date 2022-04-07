@@ -1,28 +1,32 @@
 import Logo from '../../components/logo/logo';
-import { Film } from '../../types/films';
 import { Link, useParams } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { useNavigate } from 'react-router-dom';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import TabsComponent from '../../components/tabs-component/tabs-component';
-import { Review } from '../../types/films';
 import withFilmList from '../../hooks/with-film-list';
 import FilmListScreen from '../../components/films-list-screen/films-list-screen';
+import { useAppSelector } from '../../hooks/';
+import { store } from '../../store';
+import { fetchCommentsAction } from '../../store/api-actions';
+import { useEffect } from 'react';
 
 const FilmsListWrapper = withFilmList(FilmListScreen);
 
-type MovieScreenProps = {
-  films: Film[];
-  comments: Review[];
-}
-
-function MovieScreen(props: MovieScreenProps): JSX.Element {
+function MovieScreen(): JSX.Element {
+  const { allFilms } = useAppSelector((state) => state);
   const navigate = useNavigate();
 
-  const { films, comments } = props;
-  const filmId = useParams();
+  const params = useParams<{ id: string }>();
+  const filmId: string = params.id as string;
 
-  const filmInfoById = films.find((film) => film.id === Number(filmId.id));
+  const filmInfoById = allFilms.find((film) => film.id === Number(filmId));
+
+  useEffect(() => {
+    store.dispatch(fetchCommentsAction(filmId));
+  }, [filmId]);
+
+  const { comments } = useAppSelector((state) => state);
 
   if (filmInfoById === undefined) {
     return <NotFoundScreen />;
@@ -144,7 +148,7 @@ function MovieScreen(props: MovieScreenProps): JSX.Element {
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__films-list">
-            <FilmsListWrapper films={[films[0], films[1], films[2], films[3]]} />
+            <FilmsListWrapper films={[allFilms[0], allFilms[1], allFilms[2], allFilms[3]]} />
           </div>
         </section>
 

@@ -36,8 +36,8 @@ const getReview = (comments: Review[]): JSX.Element => (
 );
 
 function FilmReviewComponent({ comments }: FilmReviewProps): JSX.Element {
-  const firstColComments: Review[] = comments.slice(0, Math.trunc(comments.length / 2));
-  const secondColComments: Review[] = comments.slice(Math.trunc(comments.length / 2) + 1);
+  const firstColComments: Review[] = comments.slice(0, Math.round(comments.length / 2));
+  const secondColComments: Review[] = comments.slice(firstColComments.length);
   return (
     <div className="film-card__reviews film-card__row">
       {getReview(firstColComments)}

@@ -1,5 +1,4 @@
 import { Film } from '../../types/films';
-// import { Link } from 'react-router-dom';
 import VideoPlayerScreen from '../video-player/video-player-element';
 import { useRef, useEffect } from 'react';
 
@@ -13,9 +12,9 @@ type SmallMovieScreenProps = {
 function SmallMovieScreen({ film, isActive, onMouseOn, onMouseOff }: SmallMovieScreenProps): JSX.Element {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
-  let timer: NodeJS.Timeout = setTimeout(() => 1 , 1000);
-
   useEffect(() => {
+    let timer: NodeJS.Timeout = setTimeout(() => 1, 1000);
+
     if (videoRef.current === null) {
       return;
     }
@@ -25,7 +24,7 @@ function SmallMovieScreen({ film, isActive, onMouseOn, onMouseOff }: SmallMovieS
     }
     videoRef.current.load();
     clearTimeout(timer);
-  }, [isActive, timer]);
+  }, [isActive]);
 
   return (
     <article className="small-film-card catalog__films-card"
