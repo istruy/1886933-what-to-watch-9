@@ -34,7 +34,7 @@ export const fetchCommentsAction = (filmId: string) => createAsyncThunk(
       errorHandle(error);
     }
   },
-);
+)();
 
 export const fetchFilmsAction = createAsyncThunk(
   'data/fetchFilms',

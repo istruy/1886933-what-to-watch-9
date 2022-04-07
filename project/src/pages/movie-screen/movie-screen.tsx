@@ -16,13 +16,15 @@ const FilmsListWrapper = withFilmList(FilmListScreen);
 function MovieScreen(): JSX.Element {
   const { allFilms } = useAppSelector((state) => state);
   const navigate = useNavigate();
-  const filmId = useParams();
 
-  const filmInfoById = allFilms.find((film) => film.id === Number(filmId.id));
+  const params = useParams<{ id: string }>();
+  const filmId: string = params.id as string;
+
+  const filmInfoById = allFilms.find((film) => film.id === Number(filmId));
 
   useEffect(() => {
-    store.dispatch(fetchCommentsAction(String(filmId.id)));
-  }, [filmInfoById]);
+    store.dispatch(fetchCommentsAction(filmId));
+  }, [filmId]);
 
   const { comments } = useAppSelector((state) => state);
 

@@ -8,16 +8,12 @@ import MovieScreen from '../../pages/movie-screen/movie-screen';
 import PlayerScreen from '../../pages/player-screen/player-screen';
 import PrivateRoute from '../private-route/private-route';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
-import { Comment } from '../../types/films';
 import { useAppSelector } from '../../hooks/';
 // import { isCheckedAuth } from '../films-list';
 import LoadingScreen from '../loading-screen/loading-screen';
 
-type AppScreenProps = {
-  comment: Comment;
-}
 
-function App({ comment }: AppScreenProps): JSX.Element {
+function App(): JSX.Element {
   const { authorizationStatus, isDataLoaded } = useAppSelector((state) => state);
 
   // isCheckedAuth(authorizationStatus) ||
@@ -44,7 +40,7 @@ function App({ comment }: AppScreenProps): JSX.Element {
             <PrivateRoute
               authorizationStatus={authorizationStatus}
             >
-              <AddReviewScreen comment={comment} onSendMessage={() => {
+              <AddReviewScreen onSendMessage={() => {
                 throw new Error('Function \'onSendMessage\' isn\'t implemented.');
               }}
               />

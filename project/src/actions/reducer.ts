@@ -3,7 +3,7 @@ import { createReducer } from '@reduxjs/toolkit';
 import { changeGenre, getFilmsList, loadComments, loadFilms, requireAuthorization, setError } from './actions';
 import { Film, Review } from '../types/films';
 
-type initialState = {
+type InitialState = {
   genre: string,
   movieList: Film[],
   allFilms: Film[],
@@ -13,7 +13,7 @@ type initialState = {
   isDataLoaded: boolean,
 };
 
-const initialState: initialState = {
+const initialState: InitialState = {
   genre: Genres.AllGenres.toString(),
   movieList: [],
   allFilms: [],
