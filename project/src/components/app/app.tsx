@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import MainScreen from '../../pages/main-screen/main-screen';
 import { AppRoute } from '../../const';
 import SignInScreen from '../../pages/sign-in-screen/sign-in-screen';
@@ -9,22 +9,23 @@ import PlayerScreen from '../../pages/player-screen/player-screen';
 import PrivateRoute from '../private-route/private-route';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import { useAppSelector } from '../../hooks/';
-// import { isCheckedAuth } from '../films-list';
+import { isCheckedAuth } from '../films-list';
 import LoadingScreen from '../loading-screen/loading-screen';
+import HistoryRouter from '../history-route/history-route';
+import browserHistory from '../../browser-history';
 
 
 function App(): JSX.Element {
   const { authorizationStatus, isDataLoaded } = useAppSelector((state) => state);
 
-  // isCheckedAuth(authorizationStatus) ||
-  if (!isDataLoaded) {
+  if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
     return (
       <LoadingScreen />
     );
   }
 
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route
           path={AppRoute.Main}
@@ -71,7 +72,7 @@ function App(): JSX.Element {
         >
         </Route>
       </Routes>
-    </BrowserRouter >
+    </HistoryRouter >
   );
 }
 
