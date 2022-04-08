@@ -3,6 +3,9 @@ import SendReviewScreen from '../../components/send-review-screen/send-review-sc
 import { Link, useParams } from 'react-router-dom';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import { useAppSelector } from '../../hooks/';
+import SignOut from '../../components/sign-out/sign-out';
+import Guest from '../../components/guest/guest';
+import { AuthorizationStatus } from '../../const';
 
 type ReviewProps = {
   onSendMessage: () => void;
@@ -10,7 +13,7 @@ type ReviewProps = {
 
 function AddReviewScreen({ onSendMessage }: ReviewProps): JSX.Element {
   const filmId = useParams();
-  const { allFilms } = useAppSelector((state) => state);
+  const { allFilms, authorizationStatus } = useAppSelector((state) => state);
   const filmInfoById = allFilms.find((film) => film.id === Number(filmId.id));
 
   if (filmInfoById === undefined) {
@@ -72,16 +75,8 @@ function AddReviewScreen({ onSendMessage }: ReviewProps): JSX.Element {
               </ul>
             </nav>
 
-            <ul className="user-block">
-              <li className="user-block__item">
-                <div className="user-block__avatar">
-                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-                </div>
-              </li>
-              <li className="user-block__item">
-                <a className="user-block__link" href="/#">Sign out</a>
-              </li>
-            </ul>
+            {authorizationStatus === AuthorizationStatus.Auth ? <SignOut /> : <Guest />}
+
           </header>
 
           <div className="film-card__poster film-card__poster--small">

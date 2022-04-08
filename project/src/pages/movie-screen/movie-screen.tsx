@@ -11,11 +11,13 @@ import { store } from '../../store';
 import { fetchCommentsAction } from '../../store/api-actions';
 import { useEffect } from 'react';
 import SignOut from '../../components/sign-out/sign-out';
+import Guest from '../../components/guest/guest';
+import { AuthorizationStatus } from '../../const';
 
 const FilmsListWrapper = withFilmList(FilmListScreen);
 
 function MovieScreen(): JSX.Element {
-  const { allFilms } = useAppSelector((state) => state);
+  const { allFilms, authorizationStatus } = useAppSelector((state) => state);
   const navigate = useNavigate();
 
   const params = useParams<{ id: string }>();
@@ -86,7 +88,7 @@ function MovieScreen(): JSX.Element {
               <Logo />
             </div>
 
-            <SignOut />
+            {authorizationStatus === AuthorizationStatus.Auth ? <SignOut /> : <Guest />}
 
           </header>
 

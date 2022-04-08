@@ -9,16 +9,15 @@ import PlayerScreen from '../../pages/player-screen/player-screen';
 import PrivateRoute from '../private-route/private-route';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import { useAppSelector } from '../../hooks/';
-import { isCheckedAuth } from '../films-list';
 import LoadingScreen from '../loading-screen/loading-screen';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
-
+import { AuthorizationStatus } from '../../const';
 
 function App(): JSX.Element {
   const { authorizationStatus, isDataLoaded } = useAppSelector((state) => state);
 
-  if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
+  if (authorizationStatus === AuthorizationStatus.Unknown || !isDataLoaded) {
     return (
       <LoadingScreen />
     );

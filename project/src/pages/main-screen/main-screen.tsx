@@ -5,7 +5,9 @@ import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks/';
 import withFilmList from '../../hooks/with-film-list';
 import GenresListComponent from '../../components/genres-list/genres-list';
-import { getActualPointForAuth } from '../../components/films-list';
+import { AuthorizationStatus } from '../../const';
+import SignOut from '../../components/sign-out/sign-out';
+import Guest from '../../components/guest/guest';
 
 const FilmsListWrapper = withFilmList(FilmListScreen);
 
@@ -64,7 +66,7 @@ function MainScreen(): JSX.Element {
             </a>
           </div>
 
-          {getActualPointForAuth(authorizationStatus)}
+          {authorizationStatus === AuthorizationStatus.Auth ? <SignOut /> : <Guest />}
 
         </header>
 

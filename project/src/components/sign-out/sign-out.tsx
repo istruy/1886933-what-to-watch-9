@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
-import { AppRoute } from '../../const';
+// import { AppRoute } from '../../const';
 import { logoutAction } from '../../store/api-actions';
 import { useAppDispatch } from '../../hooks';
+import { AppRoute } from '../../const';
 
 function SignOut(): JSX.Element {
 
@@ -17,7 +18,7 @@ function SignOut(): JSX.Element {
       <li className="user-block__item">
         <Link
           className="user-block__link"
-          to={AppRoute.Main}
+          to='/'
           onClick={(evt) => {
             evt.preventDefault();
             dispatch(logoutAction());
