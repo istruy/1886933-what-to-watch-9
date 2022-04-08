@@ -5,12 +5,15 @@ import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks/';
 import withFilmList from '../../hooks/with-film-list';
 import GenresListComponent from '../../components/genres-list/genres-list';
+import { AuthorizationStatus } from '../../const';
+import SignOut from '../../components/sign-out/sign-out';
+import Guest from '../../components/guest/guest';
 
 const FilmsListWrapper = withFilmList(FilmListScreen);
 
 function MainScreen(): JSX.Element {
   const navigate = useNavigate();
-  const { genre, movieList, allFilms } = useAppSelector((state) => state);
+  const { genre, movieList, allFilms, authorizationStatus } = useAppSelector((state) => state);
   const currentMovie = movieList[0];
 
   return (
@@ -63,16 +66,8 @@ function MainScreen(): JSX.Element {
             </a>
           </div>
 
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </li>
-            <li className="user-block__item">
-              <a className="user-block__link" href="/#">Sign out</a>
-            </li>
-          </ul>
+          {authorizationStatus === AuthorizationStatus.Auth ? <SignOut /> : <Guest />}
+
         </header>
 
         <div className="film-card__wrap">
