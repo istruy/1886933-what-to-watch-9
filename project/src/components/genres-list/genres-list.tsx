@@ -1,9 +1,9 @@
 import { Film } from '../../types/films';
-import { Genres, GenresNames } from '../../const';
-import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks';
-import { changeGenre, getFilmsList } from '../../actions/actions';
+import { changeGenre } from '../../store/films-list-process/films-list-process';
+import { getFilmsList } from '../../store/films-data/films-data';
 import { getHumanGenreFromUsefulGenre } from '../films-by-genre/films-by-genre';
+import GenresItems from './genres-items';
 
 type GenresListProps = {
   allFilms: Film[];
@@ -33,29 +33,12 @@ function GenresListComponent({ allFilms, genreFilm }: GenresListProps): JSX.Elem
   };
 
   return (
-    <ul className="catalog__genres-list">
-      <li
-        className={`catalog__genres-item ${genreFilm === Genres.AllGenres.toString() ? 'catalog__genres-item--active' : ''}`}
-        onClick={onClickGenre}
-      >
-        <Link to={`/#${Genres.AllGenres}`} className="catalog__genres-link">{GenresNames[Genres.AllGenres]}</Link>
-      </li>
-      {
-        genresList.map((filmGenre) => {
-          const currentGenrefilm = filmGenre;
-          return (
-            <li
-              className={`catalog__genres-item ${genreFilm === getHumanGenreFromUsefulGenre(currentGenrefilm) ? 'catalog__genres-item--active' : ''}`}
-              key={currentGenrefilm}
-              onClick={onClickGenre}
-            >
-              <Link to={`/#${currentGenrefilm}`} className="catalog__genres-link">{currentGenrefilm}</Link>
-            </li>
-          );
-        },
-        )
-      }
-    </ul>
+    <GenresItems
+      genreFilm={genreFilm}
+      genreList={genresList}
+      onClickGenre={onClickGenre}
+      getHumanGenre={getHumanGenreFromUsefulGenre}
+    />
   );
 }
 

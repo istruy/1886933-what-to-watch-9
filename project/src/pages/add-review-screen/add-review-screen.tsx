@@ -13,7 +13,9 @@ type ReviewProps = {
 
 function AddReviewScreen({ onSendMessage }: ReviewProps): JSX.Element {
   const filmId = useParams();
-  const { allFilms, authorizationStatus } = useAppSelector((state) => state);
+  const { allFilms } = useAppSelector(({ DATA }) => DATA);
+  const { authorizationStatus } = useAppSelector(({ USER }) => USER);
+
   const filmInfoById = allFilms.find((film) => film.id === Number(filmId.id));
 
   if (filmInfoById === undefined) {

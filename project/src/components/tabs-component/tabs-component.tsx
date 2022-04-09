@@ -27,7 +27,7 @@ function TabsComponent({ film, comments }: TabsComponentProps): JSX.Element {
   const activeTab = location.hash.length === 0 ? TabsFilm.Overview : location.hash.substring(1, location.hash.length) as TabsFilm;
 
   return (
-    <>
+    <div className="film-card__desc">
       <nav className="film-nav film-card__nav">
         <ul className="film-nav__list">
           <li className={`film-nav__item ${activeTab === TabsFilm.Overview ? 'film-nav__item--active' : ''}`}>
@@ -48,7 +48,7 @@ function TabsComponent({ film, comments }: TabsComponentProps): JSX.Element {
         </ul>
       </nav>
       {getActiveTab(activeTab, film, comments)}
-    </>
+    </div>
   );
 }
 

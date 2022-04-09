@@ -4,7 +4,7 @@ import { useAppSelector } from '../../hooks/';
 
 function PlayerScreen(): JSX.Element {
   const filmId = useParams();
-  const { allFilms } = useAppSelector((state) => state);
+  const { allFilms } = useAppSelector(({ DATA }) => DATA);
   const filmInfoById = allFilms.find((film) => film.id === Number(filmId.id));
 
   if (filmInfoById === undefined) {

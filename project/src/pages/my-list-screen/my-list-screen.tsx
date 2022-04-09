@@ -9,7 +9,8 @@ import { AuthorizationStatus } from '../../const';
 const FilmsListWrapper = WithFilmList(FilmListScreen);
 
 function MyListScreen(): JSX.Element {
-  const { allFilms, authorizationStatus } = useAppSelector((state) => state);
+  const { allFilms } = useAppSelector(({ DATA }) => DATA);
+  const { authorizationStatus } = useAppSelector(({ USER }) => USER);
 
   return (
     <>

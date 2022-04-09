@@ -57,3 +57,9 @@ export const GenresNames = {
   [Genres.SciFi]: 'Sci-Fi',
   [Genres.Thrillers]: 'Thriller',
 };
+
+export enum NameSpace {
+  filmsList = 'FILMS_LIST',
+  data = 'DATA',
+  user = 'USER',
+}
