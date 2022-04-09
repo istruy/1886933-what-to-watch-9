@@ -13,8 +13,12 @@ const FilmsListWrapper = withFilmList(FilmListScreen);
 
 function MainScreen(): JSX.Element {
   const navigate = useNavigate();
-  const { genre, movieList, allFilms, authorizationStatus } = useAppSelector((state) => state);
-  const currentMovie = movieList[0];
+
+  const { genre } = useAppSelector(({ FILMS_LIST }) => FILMS_LIST);
+  const { movieList, allFilms } = useAppSelector(({ DATA }) => DATA);
+  const { authorizationStatus } = useAppSelector(({ USER }) => USER);
+
+  const currentMovie = allFilms[0];
 
   return (
     <>

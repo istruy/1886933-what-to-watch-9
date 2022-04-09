@@ -17,7 +17,8 @@ import { AuthorizationStatus } from '../../const';
 const FilmsListWrapper = withFilmList(FilmListScreen);
 
 function MovieScreen(): JSX.Element {
-  const { allFilms, authorizationStatus } = useAppSelector((state) => state);
+  const { allFilms } = useAppSelector(({ DATA }) => DATA);
+  const { authorizationStatus } = useAppSelector(({ USER }) => USER);
   const navigate = useNavigate();
 
   const params = useParams<{ id: string }>();
@@ -29,7 +30,7 @@ function MovieScreen(): JSX.Element {
     store.dispatch(fetchCommentsAction(filmId));
   }, [filmId]);
 
-  const { comments } = useAppSelector((state) => state);
+  const { comments } = useAppSelector(({ DATA }) => DATA);
 
   if (filmInfoById === undefined) {
     return <NotFoundScreen />;
@@ -131,9 +132,8 @@ function MovieScreen(): JSX.Element {
               <img src={posterImage} alt={`${posterImage} poster`} width="218" height="327" />
             </div>
 
-            <div className="film-card__desc">
-              <TabsComponent film={filmInfoById} comments={comments} />
-            </div>
+            <TabsComponent film={filmInfoById} comments={comments} />
+
           </div>
         </div>
       </section>

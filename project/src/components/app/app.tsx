@@ -15,7 +15,8 @@ import browserHistory from '../../browser-history';
 import { AuthorizationStatus } from '../../const';
 
 function App(): JSX.Element {
-  const { authorizationStatus, isDataLoaded } = useAppSelector((state) => state);
+  const { authorizationStatus } = useAppSelector(({ USER }) => USER);
+  const { isDataLoaded } = useAppSelector(({ DATA }) => DATA);
 
   if (authorizationStatus === AuthorizationStatus.Unknown || !isDataLoaded) {
     return (
