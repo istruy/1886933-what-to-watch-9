@@ -9,7 +9,7 @@ type SmallMovieScreenProps = {
   onMouseOff: () => void;
 }
 
-function SmallMovieScreen({ film, isActive, onMouseOn, onMouseOff }: SmallMovieScreenProps): JSX.Element {
+function SmallFilmScreen({ film, isActive, onMouseOn, onMouseOff }: SmallMovieScreenProps): JSX.Element {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
@@ -47,4 +47,4 @@ function SmallMovieScreen({ film, isActive, onMouseOn, onMouseOff }: SmallMovieS
   );
 }
 
-export default SmallMovieScreen;
+export default SmallFilmScreen;

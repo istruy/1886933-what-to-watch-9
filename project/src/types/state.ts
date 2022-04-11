@@ -10,7 +10,7 @@ export type FilmsData = {
   allFilms: Film[],
   isDataLoaded: boolean,
   comments: Review[],
-  movieList: Film[],
+  filmListByGenre: Film[],
 }
 
 export type FilmsListProcess = {

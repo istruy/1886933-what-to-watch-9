@@ -1,35 +1,36 @@
 import { ComponentType } from 'react';
 import { useState } from 'react';
 import { Film } from '../types/films';
-import SmallMovieScreen from '../components/small-movie-screen/small-movie-screen';
+import SmallFilmScreen from '../components/small-movie-screen/small-film-screen';
 
 type HOCProps = {
   renderPlayer: (film: Film) => void
 };
 
-function withFilmList<T>(Component: ComponentType<T>)
+function withMovieList<T>(Component: ComponentType<T>)
   : ComponentType<Omit<T, keyof HOCProps>> {
 
   type ComponentProps = Omit<T, keyof HOCProps>;
 
-  function WithFilmsList(props: ComponentProps): JSX.Element {
-    const [activeFilmId, setActiveFilmId] = useState(-1);
+  function WithMoviesList(props: ComponentProps): JSX.Element {
+    const [activeMovieId, setActiveMovieId] = useState(-1);
+
     return (
       <Component
         {...props as T}
         renderPlayer={(film: Film) => (
-          <SmallMovieScreen
+          <SmallFilmScreen
             key={film.id}
             film={film}
-            isActive={film.id === activeFilmId}
-            onMouseOn={() => setActiveFilmId(activeFilmId === film.id ? -1 : film.id)}
-            onMouseOff={() => setActiveFilmId(-1)}
+            isActive={film.id === activeMovieId}
+            onMouseOn={() => setActiveMovieId(activeMovieId === film.id ? -1 : film.id)}
+            onMouseOff={() => setActiveMovieId(-1)}
           />
         )}
       />
     );
   }
-  return WithFilmsList;
+  return WithMoviesList;
 }
 
-export default withFilmList;
+export default withMovieList;

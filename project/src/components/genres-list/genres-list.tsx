@@ -4,6 +4,7 @@ import { changeGenre } from '../../store/films-list-process/films-list-process';
 import { getFilmsList } from '../../store/films-data/films-data';
 import { getHumanGenreFromUsefulGenre } from '../films-by-genre/films-by-genre';
 import GenresItems from './genres-items';
+import { useCallback } from 'react';
 
 type GenresListProps = {
   allFilms: Film[];
@@ -25,19 +26,18 @@ function GenresListComponent({ allFilms, genreFilm }: GenresListProps): JSX.Elem
     }
   })));
 
-  const onClickGenre = (evt: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
+  const memoizedOnClickGenre = useCallback((evt: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
     let genre = evt.currentTarget.children[0].innerHTML;
     genre = getHumanGenreFromUsefulGenre(genre);
     dispatch(changeGenre({ genre }));
     dispatch(getFilmsList({ genre }));
-  };
+  }, [genreFilm]);
 
   return (
     <GenresItems
       genreFilm={genreFilm}
       genreList={genresList}
-      onClickGenre={onClickGenre}
-      getHumanGenre={getHumanGenreFromUsefulGenre}
+      onClickGenre={memoizedOnClickGenre}
     />
   );
 }

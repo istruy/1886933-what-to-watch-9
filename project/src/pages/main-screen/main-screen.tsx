@@ -3,19 +3,19 @@ import Logo from '../../components/logo/logo';
 import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks/';
-import withFilmList from '../../hooks/with-film-list';
+import withMovieList from '../../hooks/with-film-list';
 import GenresListComponent from '../../components/genres-list/genres-list';
 import { AuthorizationStatus } from '../../const';
 import SignOut from '../../components/sign-out/sign-out';
 import Guest from '../../components/guest/guest';
 
-const FilmsListWrapper = withFilmList(FilmListScreen);
+const FilmsListWrapper = withMovieList(FilmListScreen);
 
 function MainScreen(): JSX.Element {
   const navigate = useNavigate();
 
   const { genre } = useAppSelector(({ FILMS_LIST }) => FILMS_LIST);
-  const { movieList, allFilms } = useAppSelector(({ DATA }) => DATA);
+  const { filmListByGenre, allFilms } = useAppSelector(({ DATA }) => DATA);
   const { authorizationStatus } = useAppSelector(({ USER }) => USER);
 
   const currentMovie = allFilms[0];
@@ -117,7 +117,7 @@ function MainScreen(): JSX.Element {
           <GenresListComponent allFilms={allFilms} genreFilm={genre} />
 
           <div className="catalog__films-list">
-            <FilmsListWrapper films={movieList} />
+            <FilmsListWrapper films={filmListByGenre} />
           </div>
 
           <div className="catalog__more">
