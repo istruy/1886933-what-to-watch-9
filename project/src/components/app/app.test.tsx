@@ -14,10 +14,10 @@ const store = mockStore({
     allFilms: [],
     comments: [],
     filmListByGenre: [],
-    isDataLoaded: false
+    isDataLoaded: false,
   },
   FILMS_LIST: {
-    genre: Genres.AllGenres.toString()
+    genre: Genres.AllGenres.toString(),
   },
 });
 

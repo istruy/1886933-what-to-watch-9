@@ -17,7 +17,7 @@ describe('Component: Logo', () => {
         <HistoryRouter history={history}>
           <Logo />
         </HistoryRouter>
-      </Provider>
+      </Provider>,
     );
 
     expect(screen.getByAltText(/W/i)).toBeInTheDocument();

@@ -16,7 +16,7 @@ describe('Reducer: userProcess', () => {
 
     expect(userProcess.reducer(state, requireAuthorization(AuthorizationStatus.Auth)))
       .toEqual({
-        authorizationStatus: AuthorizationStatus.Auth
+        authorizationStatus: AuthorizationStatus.Auth,
       });
   });
 
@@ -27,7 +27,7 @@ describe('Reducer: userProcess', () => {
 
     expect(userProcess.reducer(state, requireAuthorization(AuthorizationStatus.NoAuth)))
       .toEqual({
-        authorizationStatus: AuthorizationStatus.NoAuth
+        authorizationStatus: AuthorizationStatus.NoAuth,
       });
   });
 

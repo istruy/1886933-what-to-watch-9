@@ -31,7 +31,7 @@ function GenresListComponent({ allFilms, genreFilm }: GenresListProps): JSX.Elem
     genre = getHumanGenreFromUsefulGenre(genre);
     dispatch(changeGenre({ genre }));
     dispatch(getFilmsList({ genre }));
-  }, [genreFilm]);
+  }, [dispatch]);
 
   return (
     <GenresItems

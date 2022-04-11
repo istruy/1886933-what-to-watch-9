@@ -13,7 +13,7 @@ describe('Component: Sign in screen', () => {
     render(
       <HistoryRouter history={history}>
         <SignInScreen />
-      </HistoryRouter>
+      </HistoryRouter>,
     );
 
     expect(screen.getByText(/Password/i)).toBeInTheDocument();

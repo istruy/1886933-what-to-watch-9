@@ -20,7 +20,7 @@ describe('Component: Send review screen', () => {
         <HistoryRouter history={history}>
           <NotFoundScreen />
         </HistoryRouter>
-      </Provider>
+      </Provider>,
     );
 
     expect(screen.getByText(/Page not found/i)).toBeInTheDocument();

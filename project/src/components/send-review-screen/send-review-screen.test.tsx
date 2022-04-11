@@ -20,8 +20,7 @@ describe('Component: Send review screen', () => {
         <HistoryRouter history={history}>
           <SendReviewScreen onSendMessage={jest.fn()} />
         </HistoryRouter>
-      </Provider>
-
+      </Provider>,
     );
 
     expect(screen.getByText(/Rating 9/i)).toBeInTheDocument();

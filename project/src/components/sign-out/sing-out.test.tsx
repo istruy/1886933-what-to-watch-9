@@ -12,7 +12,7 @@ describe('Component: Sign out screen', () => {
     render(
       <HistoryRouter history={history}>
         <SignOut />
-      </HistoryRouter>
+      </HistoryRouter>,
     );
 
     expect(screen.getByText(/Sign out/i)).toBeInTheDocument();
