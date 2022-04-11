@@ -4,8 +4,8 @@ import { useAppSelector } from '../../hooks/';
 
 function PlayerScreen(): JSX.Element {
   const filmId = useParams();
-  const { allFilms } = useAppSelector(({ DATA }) => DATA);
-  const filmInfoById = allFilms.find((film) => film.id === Number(filmId.id));
+  const { allFilms: allMovies } = useAppSelector(({ DATA }) => DATA);
+  const filmInfoById = allMovies.find((film) => film.id === Number(filmId.id));
 
   if (filmInfoById === undefined) {
     return <NotFoundScreen />;

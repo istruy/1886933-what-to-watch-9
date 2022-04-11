@@ -4,7 +4,7 @@ import { AppRoute } from '../../const';
 import { useNavigate } from 'react-router-dom';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import TabsComponent from '../../components/tabs-component/tabs-component';
-import withFilmList from '../../hooks/with-film-list';
+import withMovieList from '../../hooks/with-film-list';
 import FilmListScreen from '../../components/films-list-screen/films-list-screen';
 import { useAppSelector } from '../../hooks/';
 import { store } from '../../store';
@@ -14,9 +14,9 @@ import SignOut from '../../components/sign-out/sign-out';
 import Guest from '../../components/guest/guest';
 import { AuthorizationStatus } from '../../const';
 
-const FilmsListWrapper = withFilmList(FilmListScreen);
+const FilmsListWrapper = withMovieList(FilmListScreen);
 
-function MovieScreen(): JSX.Element {
+function FilmScreen(): JSX.Element {
   const { allFilms } = useAppSelector(({ DATA }) => DATA);
   const { authorizationStatus } = useAppSelector(({ USER }) => USER);
   const navigate = useNavigate();
@@ -161,4 +161,4 @@ function MovieScreen(): JSX.Element {
   );
 }
 
-export default MovieScreen;
+export default FilmScreen;

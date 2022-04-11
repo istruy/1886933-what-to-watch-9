@@ -43,6 +43,7 @@ export enum Genres {
   Romance = 'Romance',
   SciFi = 'SciFi',
   Thrillers = 'Thrillers',
+  Action = 'Action',
 }
 
 export const GenresNames = {
@@ -59,7 +60,7 @@ export const GenresNames = {
 };
 
 export enum NameSpace {
-  filmsList = 'FILMS_LIST',
-  data = 'DATA',
-  user = 'USER',
+  FilmsList = 'FILMS_LIST',
+  Data = 'DATA',
+  User = 'USER',
 }

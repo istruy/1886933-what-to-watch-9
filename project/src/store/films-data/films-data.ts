@@ -5,17 +5,17 @@ import { FilmsData } from '../../types/state';
 const initialState: FilmsData = {
   allFilms: [],
   comments: [],
-  movieList: [],
+  filmListByGenre: [],
   isDataLoaded: false,
 };
 
 export const filmsData = createSlice({
-  name: NameSpace.data,
+  name: NameSpace.Data,
   initialState,
   reducers: {
     loadFilms: (state, action) => {
       state.allFilms = action.payload;
-      state.movieList = action.payload;
+      state.filmListByGenre = action.payload;
       state.isDataLoaded = true;
     },
     loadComments: (state, action) => {
@@ -24,7 +24,7 @@ export const filmsData = createSlice({
     getFilmsList: (state, action) => {
       const { genre } = action.payload;
 
-      state.movieList = genre === Genres.AllGenres.toString()
+      state.filmListByGenre = genre === Genres.AllGenres.toString()
         ? state.allFilms
         : state.allFilms.filter((film) => film.genre === genre);
     },

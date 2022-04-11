@@ -4,6 +4,7 @@ import { Film, Review } from '../../types/films';
 import FilmReviewComponent from './film-review';
 import FilmOverviewComponent from './film-overview';
 import FilmDetaisComponent from './film-details';
+import { useMemo } from 'react';
 
 type TabsComponentProps = {
   film: Film;
@@ -26,6 +27,8 @@ function TabsComponent({ film, comments }: TabsComponentProps): JSX.Element {
   const location = useLocation();
   const activeTab = location.hash.length === 0 ? TabsFilm.Overview : location.hash.substring(1, location.hash.length) as TabsFilm;
 
+  const memoizedGetActiveTab = useMemo(() => getActiveTab(activeTab, film, comments), [activeTab, film, comments]);
+
   return (
     <div className="film-card__desc">
       <nav className="film-nav film-card__nav">
@@ -47,7 +50,7 @@ function TabsComponent({ film, comments }: TabsComponentProps): JSX.Element {
           </li>
         </ul>
       </nav>
-      {getActiveTab(activeTab, film, comments)}
+      {memoizedGetActiveTab}
     </div>
   );
 }

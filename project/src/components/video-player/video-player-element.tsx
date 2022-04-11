@@ -1,6 +1,3 @@
-// import { Fragment } from 'react';
-// import { useParams } from 'react-router-dom';
-
 type VideoPlayerProps = {
   src: string;
   videoRef: React.RefObject<HTMLVideoElement>;

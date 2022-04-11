@@ -13,10 +13,10 @@ type ReviewProps = {
 
 function AddReviewScreen({ onSendMessage }: ReviewProps): JSX.Element {
   const filmId = useParams();
-  const { allFilms } = useAppSelector(({ DATA }) => DATA);
+  const { allFilms: allMovies } = useAppSelector(({ DATA }) => DATA);
   const { authorizationStatus } = useAppSelector(({ USER }) => USER);
 
-  const filmInfoById = allFilms.find((film) => film.id === Number(filmId.id));
+  const filmInfoById = allMovies.find((film) => film.id === Number(filmId.id));
 
   if (filmInfoById === undefined) {
     return <NotFoundScreen />;

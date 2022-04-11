@@ -3,22 +3,25 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "-": "^0.0.1",
     "@reduxjs/toolkit": "^1.5.0",
     "axios": "^0.21.1",
     "dayjs": "^1.10.8",
     "history": "^5.2.0",
+    "jest": "^27.5.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.2",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
     "react-toastify": "^8.2.0",
-    "reselect": "^4.0.0"
+    "reselect": "^4.0.0",
+    "ts-node": "^10.7.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --passWithNoTests",
+    "test": "jest --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "eslint --ext .tsx --ext .ts src/"
   },
@@ -42,6 +45,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/preset-react": "^7.16.7",
     "@jedmao/redux-mock-store": "^3.0.5",
     "@testing-library/jest-dom": "^5.11.0",
     "@testing-library/react": "^11.2.0",
@@ -59,5 +63,20 @@
     "faker": "^5.5.3",
     "redux-devtools-extension": "2.13",
     "typescript": "^4.5.5"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.(ts|tsx|js|jsx)$": "ts-jest"
+    }
+  },
+  "babel": {
+    "presets": [
+      "@babel/react",
+      "@babel/env"
+    ],
+    "plugins": [
+      "@babel/proposal-class-properties",
+      "@babel/plugin-transform-runtime"
+    ]
   }
 }

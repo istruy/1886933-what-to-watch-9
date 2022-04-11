@@ -1,14 +1,14 @@
 import { Genres, GenresNames } from '../../const';
 import { Link } from 'react-router-dom';
+import { getHumanGenreFromUsefulGenre } from '../films-by-genre/films-by-genre';
 
 type GenresItemsProps = {
   genreFilm: string;
   genreList: string[];
   onClickGenre: (evt: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
-  getHumanGenre: (string: string) => string;
 }
 
-function GenresItems({ genreFilm, genreList, onClickGenre, getHumanGenre }: GenresItemsProps): JSX.Element {
+function GenresItems({ genreFilm, genreList, onClickGenre }: GenresItemsProps): JSX.Element {
   return (
     <ul className="catalog__genres-list">
       <li
@@ -22,7 +22,7 @@ function GenresItems({ genreFilm, genreList, onClickGenre, getHumanGenre }: Genr
           const currentGenrefilm = filmGenre;
           return (
             <li
-              className={`catalog__genres-item ${genreFilm === getHumanGenre(currentGenrefilm) ? 'catalog__genres-item--active' : ''}`}
+              className={`catalog__genres-item ${genreFilm === getHumanGenreFromUsefulGenre(currentGenrefilm) ? 'catalog__genres-item--active' : ''}`}
               key={currentGenrefilm}
               onClick={onClickGenre}
             >
