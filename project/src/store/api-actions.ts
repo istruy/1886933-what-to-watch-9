@@ -10,6 +10,8 @@ import { errorHandle } from '../services/error-handle';
 import { AppDispatch, State } from '../types/state';
 import { AxiosInstance } from 'axios';
 import { AuthData } from '../types/auth-data';
+import { Comment } from '../types/films';
+import { TIMEOUT } from 'dns';
 
 export const fetchCommentsAction = (filmId: string) => createAsyncThunk<void, undefined, {
   dispatch: AppDispatch,
@@ -27,7 +29,7 @@ export const fetchCommentsAction = (filmId: string) => createAsyncThunk<void, un
   },
 )();
 
-export const  fetchFilmsAction = createAsyncThunk<void, undefined, {
+export const fetchFilmsAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch,
   state: State,
   extra: AxiosInstance
@@ -59,6 +61,23 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
     }
   },
 );
+
+export const postReview = (filmId: string, { comment, rating }: Comment) => createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}>(
+  'data/postReview',
+  async (_arg, { dispatch, extra: api }) => {
+    try {
+      await api.post<UserData>(`${APIRoute.Comments}${filmId}`, { comment, rating });
+      dispatch(loadComments(filmId));
+      dispatch(redirectToRoute(`${AppRoute.OnlyFilm}${filmId}`));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+)();
 
 export const loginAction = createAsyncThunk<void, AuthData, {
   dispatch: AppDispatch,
