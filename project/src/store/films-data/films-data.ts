@@ -7,6 +7,7 @@ const initialState: FilmsData = {
   comments: [],
   filmListByGenre: [],
   isDataLoaded: false,
+  isCommentPosted: false,
 };
 
 export const filmsData = createSlice({
@@ -19,6 +20,7 @@ export const filmsData = createSlice({
       state.isDataLoaded = true;
     },
     loadComments: (state, action) => {
+      state.isCommentPosted = false;
       state.comments = action.payload;
     },
     getFilmsList: (state, action) => {
@@ -28,8 +30,11 @@ export const filmsData = createSlice({
         ? state.allFilms
         : state.allFilms.filter((film) => film.genre === genre);
     },
+    setCommentsPosted: (state) => {
+      state.isCommentPosted = true;
+    },
   },
 });
 
-export const { loadComments, loadFilms, getFilmsList } = filmsData.actions;
+export const { loadComments, loadFilms, getFilmsList, setCommentsPosted } = filmsData.actions;
 

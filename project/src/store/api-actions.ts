@@ -11,7 +11,6 @@ import { AppDispatch, State } from '../types/state';
 import { AxiosInstance } from 'axios';
 import { AuthData } from '../types/auth-data';
 import { Comment } from '../types/films';
-import { TIMEOUT } from 'dns';
 
 export const fetchCommentsAction = (filmId: string) => createAsyncThunk<void, undefined, {
   dispatch: AppDispatch,

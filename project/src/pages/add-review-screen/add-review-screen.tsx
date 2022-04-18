@@ -87,7 +87,7 @@ function AddReviewScreen({ onSendMessage }: ReviewProps): JSX.Element {
         </div>
 
         <div className="add-review">
-          <SendReviewScreen onSendMessage={onSendMessage} />
+          <SendReviewScreen filmId={filmInfoById.id.toString()} />
         </div>
 
       </section>

@@ -4,7 +4,7 @@ import { AppRoute } from '../../const';
 import SignInScreen from '../../pages/sign-in-screen/sign-in-screen';
 import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
 import MyListScreen from '../../pages/my-list-screen/my-list-screen';
-import FilmScreen from '../../pages/movie-screen/movie-screen';
+import FilmScreen from '../../pages/film-screen/film-screen';
 import PlayerScreen from '../../pages/player-screen/player-screen';
 import PrivateRoute from '../private-route/private-route';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';

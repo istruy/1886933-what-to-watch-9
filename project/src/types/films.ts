@@ -31,5 +31,5 @@ export type Review = {
 
 export type Comment = {
   comment: string
-  rating: number
+  rating: string
 }

@@ -6,7 +6,7 @@ import NotFoundScreen from '../not-found-screen/not-found-screen';
 import TabsComponent from '../../components/tabs-component/tabs-component';
 import withMovieList from '../../hooks/with-film-list';
 import FilmListScreen from '../../components/films-list-screen/films-list-screen';
-import { useAppSelector } from '../../hooks/';
+import { useAppSelector } from '../../hooks';
 import { store } from '../../store';
 import { fetchCommentsAction } from '../../store/api-actions';
 import { useEffect } from 'react';
@@ -118,9 +118,14 @@ function FilmScreen(): JSX.Element {
                   </svg>
                   <span>My list</span>
                 </button>
-                <Link to={`/films/${filmInfoById.id}/review`} className="btn film-card__button">
-                  Add review
-                </Link>
+                {authorizationStatus === AuthorizationStatus.Auth
+                  ?
+                  <Link to={`/films/${filmInfoById.id}/review`} className="btn film-card__button">
+                    Add review
+                  </Link>
+                  : ''}
+
+
               </div>
             </div>
           </div>

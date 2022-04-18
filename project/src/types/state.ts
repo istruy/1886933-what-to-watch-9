@@ -11,10 +11,12 @@ export type FilmsData = {
   isDataLoaded: boolean,
   comments: Review[],
   filmListByGenre: Film[],
+  isCommentPosted: boolean,
 }
 
 export type FilmsListProcess = {
   genre: string,
+  countFilmCards: number;
 }
 
 export type UserProcess = {

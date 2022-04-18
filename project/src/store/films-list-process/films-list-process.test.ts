@@ -13,6 +13,7 @@ describe('Reducer: filmsListProcess', () => {
     const genre = 'Action';
     const state = {
       genre: Genres.AllGenres.toString(),
+      countFilmCards: 8,
     };
 
     expect(filmsProcess.reducer(state, changeGenre({ genre: genre })))

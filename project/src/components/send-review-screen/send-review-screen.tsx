@@ -1,60 +1,91 @@
-import { FormEvent } from 'react';
+import { postReview } from '../../store/api-actions';
+import { useRef, FormEvent, useEffect } from 'react';
+import { Comment } from '../../types/films';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { STAR_COUNT } from '../../const';
+import Rating from '../rating/rating';
+import { useState } from 'react';
+import { setCommentsPosted } from '../../store/films-data/films-data';
 
 type ReviewProps = {
-  onSendMessage: () => void
+  filmId: string,
 }
 
-function SendReviewScreen({ onSendMessage }: ReviewProps): JSX.Element {
+function SendReviewScreen({ filmId }: ReviewProps): JSX.Element {
+  const commentRef = useRef<HTMLTextAreaElement | null>(null);
+  const { isCommentPosted } = useAppSelector(({ DATA }) => DATA);
+
+  const ratings = Array.from(Array(STAR_COUNT).keys());
+
+  const [countStar, setCountStar] = useState('');
+  const [activePost, setActivePost] = useState(true);
+  const [commentText, setCommentText] = useState('');
+
+  const allStars = ratings.map((star) => <Rating key={star} rating={star} onChange={(starCount: string) => setCountStar(starCount)} />);
+
+  const dispatch = useAppDispatch();
+
+  const onSubmit = (comment: Comment) => {
+    dispatch(postReview(filmId, comment));
+  };
+
+  useEffect(() => {
+    if (commentText !== '') {
+      if (Number(commentText.length) >= 50 && Number(commentText.length) <= 400 && countStar !== '') {
+        setActivePost(() => false);
+      } else {
+        setActivePost(() => true);
+      }
+    } else {
+      setActivePost(() => true);
+    }
+  }, [commentText, countStar]);
+
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
+    if (commentRef.current !== null && countStar !== '') {
+      dispatch(setCommentsPosted);
+      onSubmit({
+        comment: commentRef.current.value,
+        rating: countStar,
+      });
+    }
+  };
+
   return (
-    <form action="#"
+    <form action=""
       className="add-review__form"
-      onSubmit={(evt: FormEvent<HTMLFormElement>) => {
-        evt.preventDefault();
-        onSendMessage();
-      }}
+      onSubmit={handleSubmit}
     >
       <div className="rating">
         <div className="rating__stars">
-          <input className="rating__input" id="star-10" type="radio" name="rating" value="10" />
-          <label className="rating__label" htmlFor="star-10">Rating 10</label>
-
-          <input className="rating__input" id="star-9" type="radio" name="rating" value="9" />
-          <label className="rating__label" htmlFor="star-9">Rating 9</label>
-
-          <input className="rating__input" id="star-8" type="radio" name="rating" value="8" defaultChecked />
-          <label className="rating__label" htmlFor="star-8">Rating 8</label>
-
-          <input className="rating__input" id="star-7" type="radio" name="rating" value="7" />
-          <label className="rating__label" htmlFor="star-7">Rating 7</label>
-
-          <input className="rating__input" id="star-6" type="radio" name="rating" value="6" />
-          <label className="rating__label" htmlFor="star-6">Rating 6</label>
-
-          <input className="rating__input" id="star-5" type="radio" name="rating" value="5" />
-          <label className="rating__label" htmlFor="star-5">Rating 5</label>
-
-          <input className="rating__input" id="star-4" type="radio" name="rating" value="4" />
-          <label className="rating__label" htmlFor="star-4">Rating 4</label>
-
-          <input className="rating__input" id="star-3" type="radio" name="rating" value="3" />
-          <label className="rating__label" htmlFor="star-3">Rating 3</label>
-
-          <input className="rating__input" id="star-2" type="radio" name="rating" value="2" />
-          <label className="rating__label" htmlFor="star-2">Rating 2</label>
-
-          <input className="rating__input" id="star-1" type="radio" name="rating" value="1" />
-          <label className="rating__label" htmlFor="star-1">Rating 1</label>
+          {allStars}
         </div>
       </div>
 
       <div className="add-review__text">
-        <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"></textarea>
+        <textarea
+          className="add-review__textarea"
+          name="review-text"
+          id="review-text"
+          placeholder="Review text"
+          onChange={({ target }) => setCommentText(target.value)}
+          ref={commentRef}
+          disabled={isCommentPosted}
+        >
+        </textarea>
         <div className="add-review__submit">
-          <button className="add-review__btn" type="submit">Post</button>
+          <button
+            className="add-review__btn"
+            type="submit"
+            disabled={activePost || isCommentPosted}
+          >
+            Post
+          </button>
         </div>
-
       </div>
-    </form>
+    </form >
   );
 }
 

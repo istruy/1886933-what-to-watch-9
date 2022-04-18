@@ -1,3 +1,5 @@
+export const STAR_COUNT = 10;
+
 export enum AppRoute {
   Main = '/',
   SignIn = '/login',
@@ -5,6 +7,7 @@ export enum AppRoute {
   Film = '/films/:id',
   AddReview = '/films/:id/review',
   Player = '/player/:id',
+  OnlyFilm = '/films/',
 }
 
 export enum AuthorizationStatus {

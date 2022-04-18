@@ -13,6 +13,7 @@ describe('Reducer: filmsData', () => {
         comments: [],
         filmListByGenre: [],
         isDataLoaded: false,
+        isCommentPosted: false
       });
   });
 
@@ -22,6 +23,7 @@ describe('Reducer: filmsData', () => {
       comments: [],
       filmListByGenre: [],
       isDataLoaded: false,
+      isCommentPosted: false
     };
     expect(filmsData.reducer(state, loadFilms(fakeFilm)))
       .toEqual({
@@ -29,6 +31,7 @@ describe('Reducer: filmsData', () => {
         comments: [],
         filmListByGenre: fakeFilm,
         isDataLoaded: true,
+        isCommentPosted: false,
       });
   });
 
@@ -38,6 +41,7 @@ describe('Reducer: filmsData', () => {
       comments: [],
       filmListByGenre: [],
       isDataLoaded: false,
+      isCommentPosted: false,
     };
     expect(filmsData.reducer(state, loadComments(fakeComments)))
       .toEqual({
@@ -45,6 +49,7 @@ describe('Reducer: filmsData', () => {
         comments: fakeComments,
         filmListByGenre: [],
         isDataLoaded: false,
+        isCommentPosted: false,
       });
   });
 
@@ -54,6 +59,7 @@ describe('Reducer: filmsData', () => {
       comments: [],
       filmListByGenre: [],
       isDataLoaded: false,
+      isCommentPosted: false,
     };
     const genreOne = 'Action';
 
@@ -63,6 +69,7 @@ describe('Reducer: filmsData', () => {
         comments: [],
         filmListByGenre: fakeFilm,
         isDataLoaded: false,
+        isCommentPosted: false,
       });
   });
 
@@ -72,6 +79,7 @@ describe('Reducer: filmsData', () => {
       comments: [],
       filmListByGenre: [],
       isDataLoaded: false,
+      isCommentPosted: false,
     };
     const genreSecond = 'Drama';
 

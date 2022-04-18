@@ -116,13 +116,11 @@ function MainScreen(): JSX.Element {
 
           <GenresListComponent allFilms={allFilms} genreFilm={genre} />
 
-          <div className="catalog__films-list">
-            <FilmsListWrapper films={filmListByGenre} />
-          </div>
+          {/* <div className="catalog__films-list"> */}
+          <FilmsListWrapper films={filmListByGenre} />
+          {/* </div> */}
 
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+
         </section>
 
         <footer className="page-footer">

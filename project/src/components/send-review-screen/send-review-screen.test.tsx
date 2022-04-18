@@ -18,7 +18,7 @@ describe('Component: Send review screen', () => {
     render(
       <Provider store={store}>
         <HistoryRouter history={history}>
-          <SendReviewScreen onSendMessage={jest.fn()} />
+          <SendReviewScreen filmId='3' />
         </HistoryRouter>
       </Provider>,
     );
